@@ -1,0 +1,79 @@
+{
+  "artifacts": {
+    "cdkapprefbuildcoreprodpipelinecdkapprefprodcore53312EE6.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "cdkapprefbuildcoreprodpipelinecdkapprefprodcore53312EE6.assets.json",
+        "requiresBootstrapStackVersion": 4
+      }
+    },
+    "cdkapprefbuildcoreprodpipelinecdkapprefprodcore53312EE6": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://001112238813/eu-west-1",
+      "properties": {
+        "templateFile": "cdkapprefbuildcoreprodpipelinecdkapprefprodcore53312EE6.template.json",
+        "tags": {
+          "Project": "liflig-cdk-app-reference",
+          "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
+          "StackName": "cdkappref-prod-core"
+        },
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-hnb659fds-deploy-role-001112238813-eu-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-hnb659fds-cfn-exec-role-001112238813-eu-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-001112238813-eu-west-1/snapshot-value",
+        "requiresBootstrapStackVersion": 4,
+        "additionalDependencies": [
+          "cdkapprefbuildcoreprodpipelinecdkapprefprodcore53312EE6.assets"
+        ],
+        "stackName": "cdkappref-prod-core"
+      },
+      "dependencies": [
+        "cdkapprefbuildcoreprodpipelinecdkapprefprodcore53312EE6.assets"
+      ],
+      "metadata": {
+        "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "Project",
+                "Value": "liflig-cdk-app-reference"
+              },
+              {
+                "Key": "SourceRepo",
+                "Value": "github/capralifecycle/liflig-cdk-app-reference"
+              },
+              {
+                "Key": "StackName",
+                "Value": "cdkappref-prod-core"
+              }
+            ]
+          }
+        ],
+        "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core/ExampleResource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExampleResourceAC53F4AE"
+          }
+        ],
+        "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "infrastructure",
+  "version": "0.0.0-development",
+  "scripts": {
+    "cdk": "cdk",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "snapshots": "rm -rf cdk.out __snapshots__ && IS_SNAPSHOT=true cdk synth && cdk-create-snapshots"
+  },
+  "devDependencies": {
+    "@types/node": "14.14.20",
+    "@typescript-eslint/eslint-plugin": "4.12.0",
+    "@typescript-eslint/parser": "4.12.0",
+    "aws-cdk": "1.83.0",
+    "eslint": "7.17.0",
+    "eslint-config-prettier": "7.1.0",
+    "eslint-plugin-deprecation": "1.2.0",
+    "eslint-plugin-prettier": "3.3.1",
+    "prettier": "2.2.1",
+    "ts-node": "9.1.1",
+    "typescript": "4.1.3"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-codebuild": "1.83.0",
+    "@aws-cdk/aws-codepipeline": "1.83.0",
+    "@aws-cdk/aws-codepipeline-actions": "1.83.0",
+    "@aws-cdk/aws-ecs": "1.83.0",
+    "@aws-cdk/aws-events-targets": "1.83.0",
+    "@aws-cdk/aws-iam": "1.83.0",
+    "@aws-cdk/aws-lambda": "1.83.0",
+    "@aws-cdk/aws-s3": "1.83.0",
+    "@aws-cdk/aws-ssm": "1.83.0",
+    "@aws-cdk/aws-stepfunctions": "1.83.0",
+    "@aws-cdk/aws-stepfunctions-tasks": "1.83.0",
+    "@aws-cdk/core": "1.83.0",
+    "@aws-cdk/custom-resources": "1.83.0",
+    "@aws-cdk/pipelines": "1.83.0",
+    "@liflig/cdk": "1.29.3"
+  }
+}

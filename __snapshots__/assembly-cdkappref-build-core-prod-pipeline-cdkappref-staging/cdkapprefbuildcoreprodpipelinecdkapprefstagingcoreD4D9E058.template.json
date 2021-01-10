@@ -1,0 +1,51 @@
+{
+  "Resources": {
+    "ExampleResourceAC53F4AE": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Type": "String",
+        "Value": "staging",
+        "Tags": {
+          "Project": "liflig-cdk-app-reference",
+          "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
+          "StackName": "cdkappref-staging-core"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-prod-pipeline/cdkappref-staging/core/ExampleResource/Resource"
+      }
+    }
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store."
+    }
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3"
+                  ],
+                  {
+                    "Ref": "BootstrapVersion"
+                  }
+                ]
+              }
+            ]
+          },
+          "AssertDescription": "CDK bootstrap stack version 4 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+        }
+      ]
+    }
+  }
+}
