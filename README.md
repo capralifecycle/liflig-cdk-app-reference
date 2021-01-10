@@ -4,6 +4,7 @@ This is a companion to https://confluence.capraconsulting.no/x/0NoBC
 
 ## Checklist if using this reference
 
+- Consider removing `LICENSE`
 - Modify `config.ts`
 - Modify `artifactsBucket` under `src/pipelines`
 - Artifact bucket and role in Jenkinsfile must be changed
