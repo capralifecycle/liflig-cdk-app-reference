@@ -55,6 +55,12 @@
             "data": "ExampleResourceAC53F4AE"
           }
         ],
+        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/core/DemoParam/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoParam641CC643"
+          }
+        ],
         "/cdkappref-build-core-prod-pipeline/cdkappref-staging/core/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
