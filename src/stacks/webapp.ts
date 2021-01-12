@@ -53,7 +53,7 @@ export class WebappStack extends cdk.Stack {
     new webappDeploy.WebappDeploy(this, "WebappDeploy", {
       source: webappDeploy.Source.bucket(
         artifactsBucket,
-        cdkPipelines.getVariable("WebappS3Url"),
+        cdkPipelines.getVariable("WebappArtifactS3Key"),
       ),
       webBucket,
       distribution,
