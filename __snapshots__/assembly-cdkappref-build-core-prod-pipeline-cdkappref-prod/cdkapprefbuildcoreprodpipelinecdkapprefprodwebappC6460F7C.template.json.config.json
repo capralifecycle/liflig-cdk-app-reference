@@ -1,0 +1,7 @@
+{
+  "Tags": {
+    "Project": "liflig-cdk-app-reference",
+    "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
+    "StackName": "cdkappref-prod-webapp"
+  }
+}

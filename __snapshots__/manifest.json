@@ -213,6 +213,30 @@
             "data": "PipelineCdkPipelineUpdatePipelineSelfMutation3D8B717E"
           }
         ],
+        "/cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/Assets/FileRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PipelineCdkPipelineAssetsFileRole0474FB57"
+          }
+        ],
+        "/cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/Assets/FileRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PipelineCdkPipelineAssetsFileRoleDefaultPolicy2EB63D68"
+          }
+        ],
+        "/cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/Assets/FileAsset1/Default/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PipelineCdkPipelineAssetsFileAsset151D3981E"
+          }
+        ],
+        "/cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/Assets/FileAsset2/Default/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PipelineCdkPipelineAssetsFileAsset2207E4C42"
+          }
+        ],
         "/cdkappref-build-core-dev-pipeline/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
@@ -417,6 +441,30 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "PipelineCdkPipelineUpdatePipelineSelfMutation3D8B717E"
+          }
+        ],
+        "/cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/Assets/FileRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PipelineCdkPipelineAssetsFileRole0474FB57"
+          }
+        ],
+        "/cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/Assets/FileRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PipelineCdkPipelineAssetsFileRoleDefaultPolicy2EB63D68"
+          }
+        ],
+        "/cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/Assets/FileAsset1/Default/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PipelineCdkPipelineAssetsFileAsset151D3981E"
+          }
+        ],
+        "/cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/Assets/FileAsset2/Default/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PipelineCdkPipelineAssetsFileAsset2207E4C42"
           }
         ],
         "/cdkappref-build-core-prod-pipeline/CDKMetadata/Default": [

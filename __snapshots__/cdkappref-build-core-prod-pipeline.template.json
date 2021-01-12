@@ -328,6 +328,40 @@
               "Effect": "Allow",
               "Principal": {
                 "AWS": {
+                  "Fn::GetAtt": [
+                    "PipelineCdkPipelineAssetsFileRole0474FB57",
+                    "Arn"
+                  ]
+                }
+              },
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*"
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "PipelineCdkPipelineAssetsFileRole0474FB57",
+                    "Arn"
+                  ]
+                }
+              },
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey"
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
                   "Fn::Join": [
                     "",
                     [
@@ -560,6 +594,16 @@
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
               "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCdkPipelineAssetsFileRole0474FB57",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": {
                 "Fn::Join": [
                   "",
                   [
@@ -730,6 +774,63 @@
             "Actions": [
               {
                 "ActionTypeId": {
+                  "Category": "Build",
+                  "Owner": "AWS",
+                  "Provider": "CodeBuild",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "ProjectName": {
+                    "Ref": "PipelineCdkPipelineAssetsFileAsset151D3981E"
+                  }
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "Artifact_GenerateCloudAssembly_Synth"
+                  }
+                ],
+                "Name": "FileAsset1",
+                "RoleArn": {
+                  "Fn::GetAtt": [
+                    "PipelineCdkPipelineAssetsFileRole0474FB57",
+                    "Arn"
+                  ]
+                },
+                "RunOrder": 1
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Build",
+                  "Owner": "AWS",
+                  "Provider": "CodeBuild",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "ProjectName": {
+                    "Ref": "PipelineCdkPipelineAssetsFileAsset2207E4C42"
+                  }
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "Artifact_GenerateCloudAssembly_Synth"
+                  }
+                ],
+                "Name": "FileAsset2",
+                "RoleArn": {
+                  "Fn::GetAtt": [
+                    "PipelineCdkPipelineAssetsFileRole0474FB57",
+                    "Arn"
+                  ]
+                },
+                "RunOrder": 1
+              }
+            ],
+            "Name": "Assets"
+          },
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
                   "Category": "Deploy",
                   "Owner": "AWS",
                   "Provider": "CloudFormation",
@@ -788,6 +889,80 @@
                   "ChangeSetName": "PipelineChange"
                 },
                 "Name": "core.Deploy",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:role/cdk-hnb659fds-deploy-role-001112238813-eu-west-1"
+                    ]
+                  ]
+                },
+                "RunOrder": 2
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "StackName": "cdkappref-staging-webapp",
+                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                  "RoleArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":iam::001112238813:role/cdk-hnb659fds-cfn-exec-role-001112238813-eu-west-1"
+                      ]
+                    ]
+                  },
+                  "TemplateConfiguration": "Artifact_GenerateCloudAssembly_Synth::assembly-cdkappref-build-core-prod-pipeline-cdkappref-staging/cdkapprefbuildcoreprodpipelinecdkapprefstagingwebapp960D00E8.template.json.config.json",
+                  "ActionMode": "CHANGE_SET_REPLACE",
+                  "ChangeSetName": "PipelineChange",
+                  "TemplatePath": "Artifact_GenerateCloudAssembly_Synth::assembly-cdkappref-build-core-prod-pipeline-cdkappref-staging/cdkapprefbuildcoreprodpipelinecdkapprefstagingwebapp960D00E8.template.json"
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "Artifact_GenerateCloudAssembly_Synth"
+                  }
+                ],
+                "Name": "webapp.Prepare",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:role/cdk-hnb659fds-deploy-role-001112238813-eu-west-1"
+                    ]
+                  ]
+                },
+                "RunOrder": 1
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "StackName": "cdkappref-staging-webapp",
+                  "ActionMode": "CHANGE_SET_EXECUTE",
+                  "ChangeSetName": "PipelineChange"
+                },
+                "Name": "webapp.Deploy",
                 "RoleArn": {
                   "Fn::Join": [
                     "",
@@ -867,6 +1042,80 @@
                   "ChangeSetName": "PipelineChange"
                 },
                 "Name": "core.Deploy",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:role/cdk-hnb659fds-deploy-role-001112238813-eu-west-1"
+                    ]
+                  ]
+                },
+                "RunOrder": 2
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "StackName": "cdkappref-prod-webapp",
+                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                  "RoleArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":iam::001112238813:role/cdk-hnb659fds-cfn-exec-role-001112238813-eu-west-1"
+                      ]
+                    ]
+                  },
+                  "TemplateConfiguration": "Artifact_GenerateCloudAssembly_Synth::assembly-cdkappref-build-core-prod-pipeline-cdkappref-prod/cdkapprefbuildcoreprodpipelinecdkapprefprodwebappC6460F7C.template.json.config.json",
+                  "ActionMode": "CHANGE_SET_REPLACE",
+                  "ChangeSetName": "PipelineChange",
+                  "TemplatePath": "Artifact_GenerateCloudAssembly_Synth::assembly-cdkappref-build-core-prod-pipeline-cdkappref-prod/cdkapprefbuildcoreprodpipelinecdkapprefprodwebappC6460F7C.template.json"
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "Artifact_GenerateCloudAssembly_Synth"
+                  }
+                ],
+                "Name": "webapp.Prepare",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:role/cdk-hnb659fds-deploy-role-001112238813-eu-west-1"
+                    ]
+                  ]
+                },
+                "RunOrder": 1
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "StackName": "cdkappref-prod-webapp",
+                  "ActionMode": "CHANGE_SET_EXECUTE",
+                  "ChangeSetName": "PipelineChange"
+                },
+                "Name": "webapp.Deploy",
                 "RoleArn": {
                   "Fn::Join": [
                     "",
@@ -1822,6 +2071,266 @@
       },
       "Metadata": {
         "aws:cdk:path": "cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/UpdatePipeline/SelfMutation/Resource"
+      }
+    },
+    "PipelineCdkPipelineAssetsFileRole0474FB57": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codebuild.amazonaws.com",
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:root"
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-prod-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/Assets/FileRole/Resource"
+      }
+    },
+    "PipelineCdkPipelineAssetsFileRoleDefaultPolicy2EB63D68": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":logs:eu-west-1:001112238813:log-group:/aws/codebuild/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "codebuild:CreateReportGroup",
+                "codebuild:CreateReport",
+                "codebuild:UpdateReport",
+                "codebuild:BatchPutTestCases",
+                "codebuild:BatchPutCodeCoverages"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":codebuild:eu-west-1:001112238813:report-group/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "codebuild:BatchGetBuilds",
+                "codebuild:StartBuild",
+                "codebuild:StopBuild"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": "arn:*:iam::*:role/*-file-publishing-role-*"
+            },
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineArtifactsBucket9E5E7047",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineCodePipelineArtifactsBucket9E5E7047",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineCdkPipelineAssetsFileRoleDefaultPolicy2EB63D68",
+        "Roles": [
+          {
+            "Ref": "PipelineCdkPipelineAssetsFileRole0474FB57"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/Assets/FileRole/DefaultPolicy/Resource"
+      }
+    },
+    "PipelineCdkPipelineAssetsFileAsset151D3981E": {
+      "Type": "AWS::CodeBuild::Project",
+      "Properties": {
+        "Artifacts": {
+          "Type": "CODEPIPELINE"
+        },
+        "Environment": {
+          "ComputeType": "BUILD_GENERAL1_SMALL",
+          "Image": "aws/codebuild/standard:4.0",
+          "ImagePullCredentialsType": "CODEBUILD",
+          "PrivilegedMode": false,
+          "Type": "LINUX_CONTAINER"
+        },
+        "ServiceRole": {
+          "Fn::GetAtt": [
+            "PipelineCdkPipelineAssetsFileRole0474FB57",
+            "Arn"
+          ]
+        },
+        "Source": {
+          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": \"npm install -g cdk-assets\"\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-cdkappref-build-core-prod-pipeline-cdkappref-staging/cdkapprefbuildcoreprodpipelinecdkapprefstagingwebapp960D00E8.assets.json\\\" --verbose publish \\\"snapshot-value:001112238813-eu-west-1\\\"\",\n        \"cdk-assets --path \\\"assembly-cdkappref-build-core-prod-pipeline-cdkappref-prod/cdkapprefbuildcoreprodpipelinecdkapprefprodwebappC6460F7C.assets.json\\\" --verbose publish \\\"snapshot-value:001112238813-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
+          "Type": "CODEPIPELINE"
+        },
+        "EncryptionKey": {
+          "Fn::GetAtt": [
+            "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+            "Arn"
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-prod-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/Assets/FileAsset1/Default/Resource"
+      }
+    },
+    "PipelineCdkPipelineAssetsFileAsset2207E4C42": {
+      "Type": "AWS::CodeBuild::Project",
+      "Properties": {
+        "Artifacts": {
+          "Type": "CODEPIPELINE"
+        },
+        "Environment": {
+          "ComputeType": "BUILD_GENERAL1_SMALL",
+          "Image": "aws/codebuild/standard:4.0",
+          "ImagePullCredentialsType": "CODEBUILD",
+          "PrivilegedMode": false,
+          "Type": "LINUX_CONTAINER"
+        },
+        "ServiceRole": {
+          "Fn::GetAtt": [
+            "PipelineCdkPipelineAssetsFileRole0474FB57",
+            "Arn"
+          ]
+        },
+        "Source": {
+          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": \"npm install -g cdk-assets\"\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-cdkappref-build-core-prod-pipeline-cdkappref-staging/cdkapprefbuildcoreprodpipelinecdkapprefstagingwebapp960D00E8.assets.json\\\" --verbose publish \\\"snapshot-value:001112238813-eu-west-1\\\"\",\n        \"cdk-assets --path \\\"assembly-cdkappref-build-core-prod-pipeline-cdkappref-prod/cdkapprefbuildcoreprodpipelinecdkapprefprodwebappC6460F7C.assets.json\\\" --verbose publish \\\"snapshot-value:001112238813-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
+          "Type": "CODEPIPELINE"
+        },
+        "EncryptionKey": {
+          "Fn::GetAtt": [
+            "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+            "Arn"
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-prod-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/Assets/FileAsset2/Default/Resource"
       }
     }
   },

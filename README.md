@@ -2,6 +2,8 @@
 
 This is a companion to https://confluence.capraconsulting.no/x/0NoBC
 
+The webapp being deployed is located in https://github.com/capraconsulting/webapp-baseline
+
 ## Checklist if using this reference
 
 - Consider removing `LICENSE`
@@ -10,6 +12,8 @@ This is a companion to https://confluence.capraconsulting.no/x/0NoBC
 - Artifact bucket and role in Jenkinsfile must be changed
 - Modify pipeline names in Jenkinsfile
 - Remove JOB_NAME check in Jenkinsfile
+- Modify stacks to fit the application
+- Review dependencies
 
 ## Pre-commit checklist
 

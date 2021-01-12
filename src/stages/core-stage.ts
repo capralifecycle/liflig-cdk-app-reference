@@ -1,6 +1,7 @@
 import * as cdk from "@aws-cdk/core"
 import { applyTags } from "../config"
 import { CoreStack } from "../stacks/core"
+import { WebappStack } from "../stacks/webapp"
 
 interface Props extends cdk.StageProps {
   envName: string
@@ -13,6 +14,10 @@ export class CoreStage extends cdk.Stage {
     applyTags(this)
 
     new CoreStack(this, "core", {
+      envName: props.envName,
+    })
+
+    new WebappStack(this, "webapp", {
       envName: props.envName,
     })
   }
