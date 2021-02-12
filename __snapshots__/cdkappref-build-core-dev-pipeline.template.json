@@ -751,7 +751,8 @@
                 "Configuration": {
                   "ProjectName": {
                     "Ref": "PipelineCdkPipelineUpdatePipelineSelfMutation3D8B717E"
-                  }
+                  },
+                  "EnvironmentVariables": "[{\"name\":\"CDK_CLI_VERSION\",\"type\":\"PLAINTEXT\",\"value\":\"snapshot-value\"}]"
                 },
                 "InputArtifacts": [
                   {
@@ -782,7 +783,8 @@
                 "Configuration": {
                   "ProjectName": {
                     "Ref": "PipelineCdkPipelineAssetsFileAsset151D3981E"
-                  }
+                  },
+                  "EnvironmentVariables": "[{\"name\":\"CDK_CLI_VERSION\",\"type\":\"PLAINTEXT\",\"value\":\"snapshot-value\"}]"
                 },
                 "InputArtifacts": [
                   {
@@ -808,7 +810,8 @@
                 "Configuration": {
                   "ProjectName": {
                     "Ref": "PipelineCdkPipelineAssetsFileAsset2207E4C42"
-                  }
+                  },
+                  "EnvironmentVariables": "[{\"name\":\"CDK_CLI_VERSION\",\"type\":\"PLAINTEXT\",\"value\":\"snapshot-value\"}]"
                 },
                 "InputArtifacts": [
                   {
@@ -1892,7 +1895,7 @@
           ]
         },
         "Source": {
-          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": \"npm install -g aws-cdk\"\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk -a . deploy cdkappref-build-core-dev-pipeline --require-approval=never --verbose\"\n      ]\n    }\n  }\n}",
+          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": \"npm install -g aws-cdk@snapshot-value\"\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk -a . deploy cdkappref-build-core-dev-pipeline --require-approval=never --verbose\"\n      ]\n    }\n  }\n}",
           "Type": "CODEPIPELINE"
         },
         "EncryptionKey": {
@@ -2104,7 +2107,7 @@
           ]
         },
         "Source": {
-          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": \"npm install -g cdk-assets\"\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.assets.json\\\" --verbose publish \\\"snapshot-value:001112238813-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
+          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": \"npm install -g cdk-assets@snapshot-value\"\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.assets.json\\\" --verbose publish \\\"snapshot-value:001112238813-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
           "Type": "CODEPIPELINE"
         },
         "EncryptionKey": {
@@ -2152,7 +2155,7 @@
           ]
         },
         "Source": {
-          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": \"npm install -g cdk-assets\"\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.assets.json\\\" --verbose publish \\\"snapshot-value:001112238813-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
+          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": \"npm install -g cdk-assets@snapshot-value\"\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.assets.json\\\" --verbose publish \\\"snapshot-value:001112238813-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
           "Type": "CODEPIPELINE"
         },
         "EncryptionKey": {
