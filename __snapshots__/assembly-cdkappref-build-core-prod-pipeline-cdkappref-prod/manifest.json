@@ -4,7 +4,8 @@
       "type": "cdk:asset-manifest",
       "properties": {
         "file": "cdkapprefbuildcoreprodpipelinecdkapprefprodcore53312EE6.assets.json",
-        "requiresBootstrapStackVersion": 4
+        "requiresBootstrapStackVersion": 4,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
     "cdkapprefbuildcoreprodpipelinecdkapprefprodcore53312EE6": {
@@ -19,8 +20,9 @@
         },
         "assumeRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-hnb659fds-deploy-role-001112238813-eu-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-hnb659fds-cfn-exec-role-001112238813-eu-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-001112238813-eu-west-1/snapshot-value",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-001112238813-eu-west-1/snapshot-value.json",
         "requiresBootstrapStackVersion": 4,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "cdkapprefbuildcoreprodpipelinecdkapprefprodcore53312EE6.assets"
         ],
@@ -85,7 +87,8 @@
       "type": "cdk:asset-manifest",
       "properties": {
         "file": "cdkapprefbuildcoreprodpipelinecdkapprefprodwebappC6460F7C.assets.json",
-        "requiresBootstrapStackVersion": 4
+        "requiresBootstrapStackVersion": 4,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
     "cdkapprefbuildcoreprodpipelinecdkapprefprodwebappC6460F7C": {
@@ -100,8 +103,9 @@
         },
         "assumeRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-hnb659fds-deploy-role-001112238813-eu-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-hnb659fds-cfn-exec-role-001112238813-eu-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-001112238813-eu-west-1/snapshot-value",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-001112238813-eu-west-1/snapshot-value.json",
         "requiresBootstrapStackVersion": 4,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "cdkapprefbuildcoreprodpipelinecdkapprefprodwebappC6460F7C.assets"
         ],
