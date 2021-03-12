@@ -412,30 +412,28 @@
           ]
         },
         "Create": {
-          "service": "Lambda",
-          "action": "invoke",
-          "physicalResourceId": {
-            "id": "webapp-deploy"
-          },
-          "parameters": {
-            "FunctionName": {
-              "Ref": "WebappDeploy4D661524"
-            },
-            "Payload": "{\"artifactS3Url\":\"s3://incub-common-build-artifacts-001112238813-eu-west-1/snapshot-value\"}"
-          }
+          "Fn::Join": [
+            "",
+            [
+              "{\"service\":\"Lambda\",\"action\":\"invoke\",\"physicalResourceId\":{\"id\":\"webapp-deploy\"},\"parameters\":{\"FunctionName\":\"",
+              {
+                "Ref": "WebappDeploy4D661524"
+              },
+              "\",\"Payload\":\"{\\\"artifactS3Url\\\":\\\"s3://incub-common-build-artifacts-001112238813-eu-west-1/snapshot-value\\\"}\"}}"
+            ]
+          ]
         },
         "Update": {
-          "service": "Lambda",
-          "action": "invoke",
-          "physicalResourceId": {
-            "id": "webapp-deploy"
-          },
-          "parameters": {
-            "FunctionName": {
-              "Ref": "WebappDeploy4D661524"
-            },
-            "Payload": "{\"artifactS3Url\":\"s3://incub-common-build-artifacts-001112238813-eu-west-1/snapshot-value\"}"
-          }
+          "Fn::Join": [
+            "",
+            [
+              "{\"service\":\"Lambda\",\"action\":\"invoke\",\"physicalResourceId\":{\"id\":\"webapp-deploy\"},\"parameters\":{\"FunctionName\":\"",
+              {
+                "Ref": "WebappDeploy4D661524"
+              },
+              "\",\"Payload\":\"{\\\"artifactS3Url\\\":\\\"s3://incub-common-build-artifacts-001112238813-eu-west-1/snapshot-value\\\"}\"}}"
+            ]
+          ]
         },
         "InstallLatestAwsSdk": true
       },
