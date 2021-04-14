@@ -39,6 +39,6 @@
     "@aws-cdk/custom-resources": "1.97.0",
     "@aws-cdk/pipelines": "1.97.0",
     "@capraconsulting/webapp-deploy-lambda": "1.2.0",
-    "@liflig/cdk": "1.30.3"
+    "@liflig/cdk": "1.30.4"
   }
 }
