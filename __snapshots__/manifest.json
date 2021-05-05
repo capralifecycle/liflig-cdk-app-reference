@@ -32,7 +32,7 @@
       "properties": {
         "file": "cdkappref-build-core-dev-pipeline.assets.json",
         "requiresBootstrapStackVersion": 4,
-        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/liflig/version"
       }
     },
     "cdkappref-build-core-dev-pipeline": {
@@ -45,11 +45,11 @@
           "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
           "StackName": "cdkappref-build-core-dev-pipeline"
         },
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-hnb659fds-deploy-role-001112238813-eu-west-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-hnb659fds-cfn-exec-role-001112238813-eu-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-001112238813-eu-west-1/snapshot-value.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-liflig-deploy-role-001112238813-eu-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-liflig-cfn-exec-role-001112238813-eu-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-liflig-assets-001112238813-eu-west-1/snapshot-value.json",
         "requiresBootstrapStackVersion": 4,
-        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/liflig/version",
         "additionalDependencies": [
           "cdkappref-build-core-dev-pipeline.assets"
         ]
@@ -264,7 +264,7 @@
       "properties": {
         "file": "cdkappref-build-core-prod-pipeline.assets.json",
         "requiresBootstrapStackVersion": 4,
-        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/liflig/version"
       }
     },
     "cdkappref-build-core-prod-pipeline": {
@@ -277,11 +277,11 @@
           "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
           "StackName": "cdkappref-build-core-prod-pipeline"
         },
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-hnb659fds-deploy-role-001112238813-eu-west-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-hnb659fds-cfn-exec-role-001112238813-eu-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-001112238813-eu-west-1/snapshot-value.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-liflig-deploy-role-001112238813-eu-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-liflig-cfn-exec-role-001112238813-eu-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-liflig-assets-001112238813-eu-west-1/snapshot-value.json",
         "requiresBootstrapStackVersion": 4,
-        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/liflig/version",
         "additionalDependencies": [
           "cdkappref-build-core-prod-pipeline.assets"
         ]
