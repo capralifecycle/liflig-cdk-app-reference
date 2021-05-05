@@ -59,7 +59,7 @@
                 "s3:GetBucket*",
                 "s3:List*",
                 "s3:DeleteObject*",
-                "s3:PutObject*",
+                "s3:PutObject",
                 "s3:Abort*"
               ],
               "Effect": "Allow",
@@ -160,23 +160,7 @@
         "KeyPolicy": {
           "Statement": [
             {
-              "Action": [
-                "kms:Create*",
-                "kms:Describe*",
-                "kms:Enable*",
-                "kms:List*",
-                "kms:Put*",
-                "kms:Update*",
-                "kms:Revoke*",
-                "kms:Disable*",
-                "kms:Get*",
-                "kms:Delete*",
-                "kms:ScheduleKeyDeletion",
-                "kms:CancelKeyDeletion",
-                "kms:GenerateDataKey",
-                "kms:TagResource",
-                "kms:UntagResource"
-              ],
+              "Action": "kms:*",
               "Effect": "Allow",
               "Principal": {
                 "AWS": {
@@ -188,188 +172,6 @@
                         "Ref": "AWS::Partition"
                       },
                       ":iam::001112238813:root"
-                    ]
-                  ]
-                }
-              },
-              "Resource": "*"
-            },
-            {
-              "Action": [
-                "kms:Decrypt",
-                "kms:DescribeKey",
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*"
-              ],
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::GetAtt": [
-                    "PipelineCodePipelineRoleEE058E60",
-                    "Arn"
-                  ]
-                }
-              },
-              "Resource": "*"
-            },
-            {
-              "Action": [
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*",
-                "kms:Decrypt"
-              ],
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::GetAtt": [
-                    "PipelineCodePipelineSourcesourceCodePipelineActionRoleAB26C0AE",
-                    "Arn"
-                  ]
-                }
-              },
-              "Resource": "*"
-            },
-            {
-              "Action": [
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*",
-                "kms:Decrypt"
-              ],
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::GetAtt": [
-                    "PipelineCodePipelinePrepareCdkSourcepreparecdksourceCodePipelineActionRole271DB5CA",
-                    "Arn"
-                  ]
-                }
-              },
-              "Resource": "*"
-            },
-            {
-              "Action": [
-                "kms:Decrypt",
-                "kms:DescribeKey",
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*"
-              ],
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::GetAtt": [
-                    "PipelineCodePipelineGenerateCloudAssemblySynthCdkBuildProjectRoleAB5F1F3C",
-                    "Arn"
-                  ]
-                }
-              },
-              "Resource": "*"
-            },
-            {
-              "Action": [
-                "kms:Decrypt",
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*"
-              ],
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::GetAtt": [
-                    "PipelineCodePipelineGenerateCloudAssemblySynthCdkBuildProjectRoleAB5F1F3C",
-                    "Arn"
-                  ]
-                }
-              },
-              "Resource": "*"
-            },
-            {
-              "Action": [
-                "kms:Decrypt",
-                "kms:DescribeKey"
-              ],
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::GetAtt": [
-                    "PipelineCdkPipelineUpdatePipelineSelfMutationRole91D6CBA8",
-                    "Arn"
-                  ]
-                }
-              },
-              "Resource": "*"
-            },
-            {
-              "Action": [
-                "kms:Decrypt",
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*"
-              ],
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::GetAtt": [
-                    "PipelineCdkPipelineUpdatePipelineSelfMutationRole91D6CBA8",
-                    "Arn"
-                  ]
-                }
-              },
-              "Resource": "*"
-            },
-            {
-              "Action": [
-                "kms:Decrypt",
-                "kms:DescribeKey"
-              ],
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::GetAtt": [
-                    "PipelineCdkPipelineAssetsFileRole0474FB57",
-                    "Arn"
-                  ]
-                }
-              },
-              "Resource": "*"
-            },
-            {
-              "Action": [
-                "kms:Decrypt",
-                "kms:Encrypt",
-                "kms:ReEncrypt*",
-                "kms:GenerateDataKey*"
-              ],
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::GetAtt": [
-                    "PipelineCdkPipelineAssetsFileRole0474FB57",
-                    "Arn"
-                  ]
-                }
-              },
-              "Resource": "*"
-            },
-            {
-              "Action": [
-                "kms:Decrypt",
-                "kms:DescribeKey"
-              ],
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":iam::001112238813:role/cdk-hnb659fds-deploy-role-001112238813-eu-west-1"
                     ]
                   ]
                 }
@@ -507,7 +309,7 @@
                 "s3:GetBucket*",
                 "s3:List*",
                 "s3:DeleteObject*",
-                "s3:PutObject*",
+                "s3:PutObject",
                 "s3:Abort*"
               ],
               "Effect": "Allow",
@@ -1264,7 +1066,7 @@
             {
               "Action": [
                 "s3:DeleteObject*",
-                "s3:PutObject*",
+                "s3:PutObject",
                 "s3:Abort*"
               ],
               "Effect": "Allow",
@@ -1388,7 +1190,7 @@
             {
               "Action": [
                 "s3:DeleteObject*",
-                "s3:PutObject*",
+                "s3:PutObject",
                 "s3:Abort*"
               ],
               "Effect": "Allow",
@@ -1634,7 +1436,7 @@
                 "s3:GetBucket*",
                 "s3:List*",
                 "s3:DeleteObject*",
-                "s3:PutObject*",
+                "s3:PutObject",
                 "s3:Abort*"
               ],
               "Effect": "Allow",
