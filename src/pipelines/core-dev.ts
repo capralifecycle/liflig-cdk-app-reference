@@ -29,6 +29,7 @@ export class CoreDevPipelineStack extends cdk.Stack {
           region: "eu-west-1",
         },
         envName: "dev",
+        webappArtifactS3Key: cdkPipelines.getVariable("devWebappArtifactS3Key"),
       }),
     )
   }

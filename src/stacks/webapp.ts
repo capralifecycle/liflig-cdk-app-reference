@@ -4,11 +4,11 @@ import * as s3 from "@aws-cdk/aws-s3"
 import * as ssm from "@aws-cdk/aws-ssm"
 import * as cdk from "@aws-cdk/core"
 import * as webappDeploy from "@capraconsulting/webapp-deploy-lambda"
-import { cdkPipelines } from "@liflig/cdk"
 import { projectPrefix } from "../config"
 
 interface Props extends cdk.StackProps {
   envName: string
+  artifactS3Key: string
 }
 
 export class WebappStack extends cdk.Stack {
@@ -51,10 +51,7 @@ export class WebappStack extends cdk.Stack {
     })
 
     new webappDeploy.WebappDeploy(this, "WebappDeploy", {
-      source: webappDeploy.Source.bucket(
-        artifactsBucket,
-        cdkPipelines.getVariable("WebappArtifactS3Key"),
-      ),
+      source: webappDeploy.Source.bucket(artifactsBucket, props.artifactS3Key),
       webBucket,
       distribution,
     })

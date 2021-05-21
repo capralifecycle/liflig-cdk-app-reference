@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "cdk": "cdk",
+    "fetch-variables": "fetch-pipeline-variables",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "snapshots": "rm -rf cdk.out __snapshots__ && IS_SNAPSHOT=true cdk synth && cdk-create-snapshots"
@@ -39,6 +40,6 @@
     "@aws-cdk/custom-resources": "1.101.0",
     "@aws-cdk/pipelines": "1.101.0",
     "@capraconsulting/webapp-deploy-lambda": "1.2.2",
-    "@liflig/cdk": "1.31.1"
+    "@liflig/cdk": "1.35.2"
   }
 }

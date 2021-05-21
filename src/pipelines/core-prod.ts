@@ -29,6 +29,9 @@ export class CoreProdPipelineStack extends cdk.Stack {
           region: "eu-west-1",
         },
         envName: "staging",
+        webappArtifactS3Key: cdkPipelines.getVariable(
+          "prodWebappArtifactS3Key",
+        ),
       }),
     )
 
@@ -39,6 +42,9 @@ export class CoreProdPipelineStack extends cdk.Stack {
           region: "eu-west-1",
         },
         envName: "prod",
+        webappArtifactS3Key: cdkPipelines.getVariable(
+          "prodWebappArtifactS3Key",
+        ),
       }),
     )
   }
