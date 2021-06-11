@@ -32,6 +32,7 @@
     "@aws-cdk/aws-events-targets": "1.107.0",
     "@aws-cdk/aws-iam": "1.107.0",
     "@aws-cdk/aws-lambda": "1.107.0",
+    "@aws-cdk/aws-rds": "1.107.0",
     "@aws-cdk/aws-s3": "1.107.0",
     "@aws-cdk/aws-ssm": "1.107.0",
     "@aws-cdk/aws-stepfunctions": "1.107.0",
@@ -40,6 +41,6 @@
     "@aws-cdk/custom-resources": "1.107.0",
     "@aws-cdk/pipelines": "1.107.0",
     "@capraconsulting/webapp-deploy-lambda": "1.2.2",
-    "@liflig/cdk": "1.36.0"
+    "@liflig/cdk": "1.39.0"
   }
 }
