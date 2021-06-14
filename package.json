@@ -25,6 +25,7 @@
   "dependencies": {
     "@aws-cdk/aws-cloudfront": "1.108.1",
     "@aws-cdk/aws-cloudfront-origins": "1.108.1",
+    "@aws-cdk/aws-cloudwatch-actions": "1.108.1",
     "@aws-cdk/aws-codebuild": "1.108.1",
     "@aws-cdk/aws-codepipeline": "1.108.1",
     "@aws-cdk/aws-codepipeline-actions": "1.108.1",
