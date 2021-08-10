@@ -114,6 +114,12 @@
             "data": "PipelineCodePipelineArtifactsBucket9E5E7047"
           }
         ],
+        "/cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/ArtifactsBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PipelineCodePipelineArtifactsBucketPolicyDD5F42B2"
+          }
+        ],
         "/cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -346,6 +352,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "PipelineCodePipelineArtifactsBucket9E5E7047"
+          }
+        ],
+        "/cdkappref-build-core-prod-pipeline/Pipeline/CodePipeline/ArtifactsBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PipelineCodePipelineArtifactsBucketPolicyDD5F42B2"
           }
         ],
         "/cdkappref-build-core-prod-pipeline/Pipeline/CodePipeline/Role/Resource": [
