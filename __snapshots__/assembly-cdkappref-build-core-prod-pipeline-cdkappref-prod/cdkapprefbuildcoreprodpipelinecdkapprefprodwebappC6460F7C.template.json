@@ -370,6 +370,7 @@
       "Metadata": {
         "aws:cdk:path": "cdkappref-build-core-prod-pipeline/cdkappref-prod/webapp/WebappDeploy/Resource/Resource",
         "aws:asset:path": "asset.snapshot-value",
+        "aws:asset:is-bundled": false,
         "aws:asset:property": "Code"
       }
     },
@@ -531,6 +532,7 @@
       "Metadata": {
         "aws:cdk:path": "cdkappref-build-core-prod-pipeline/cdkappref-prod/webapp/AWS679f53fac002430cb0da5b7982bd2287/Resource",
         "aws:asset:path": "asset.snapshot-value",
+        "aws:asset:is-bundled": false,
         "aws:asset:property": "Code"
       }
     },
@@ -560,7 +562,7 @@
     "BootstrapVersion": {
       "Type": "AWS::SSM::Parameter::Value<String>",
       "Default": "/cdk-bootstrap/liflig/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store."
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
     }
   },
   "Rules": {
