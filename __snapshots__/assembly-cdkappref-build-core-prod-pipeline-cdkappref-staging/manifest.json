@@ -27,6 +27,11 @@
         "additionalDependencies": [
           "cdkapprefbuildcoreprodpipelinecdkapprefstagingcoreD4D9E058.assets"
         ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-liflig-lookup-role-001112238813-eu-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/liflig/version"
+        },
         "stackName": "cdkappref-staging-core"
       },
       "dependencies": [
@@ -112,6 +117,11 @@
         "additionalDependencies": [
           "cdkapprefbuildcoreprodpipelinecdkapprefstagingwebapp960D00E8.assets"
         ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-liflig-lookup-role-001112238813-eu-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/liflig/version"
+        },
         "stackName": "cdkappref-staging-webapp"
       },
       "dependencies": [

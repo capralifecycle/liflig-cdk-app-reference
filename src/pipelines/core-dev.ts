@@ -22,7 +22,7 @@ export class CoreDevPipelineStack extends cdk.Stack {
       sourceType: "cdk-source",
     })
 
-    pipeline.cdkPipeline.addApplicationStage(
+    pipeline.cdkPipeline.addStage(
       new CoreStage(this, `${projectPrefix}-dev`, {
         env: {
           account: devAccountId,

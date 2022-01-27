@@ -27,6 +27,11 @@
         "additionalDependencies": [
           "cdkapprefbuildcoredevpipelinecdkapprefdevcore9043A152.assets"
         ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-liflig-lookup-role-001112238813-eu-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/liflig/version"
+        },
         "stackName": "cdkappref-dev-core"
       },
       "dependencies": [
@@ -112,6 +117,11 @@
         "additionalDependencies": [
           "cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.assets"
         ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::001112238813:role/cdk-liflig-lookup-role-001112238813-eu-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/liflig/version"
+        },
         "stackName": "cdkappref-dev-webapp"
       },
       "dependencies": [
