@@ -5,6 +5,7 @@
     "prettier",
     "plugin:prettier/recommended"
   ],
+  "plugins": ["deprecation"],
   "overrides": [
     {
       "files": ["*.ts"]
@@ -14,6 +15,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "deprecation/deprecation": "warn",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off"
   }

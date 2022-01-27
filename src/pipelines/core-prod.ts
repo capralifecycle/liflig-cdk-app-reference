@@ -22,7 +22,7 @@ export class CoreProdPipelineStack extends cdk.Stack {
       sourceType: "cdk-source",
     })
 
-    pipeline.cdkPipeline.addApplicationStage(
+    pipeline.cdkPipeline.addStage(
       new CoreStage(this, `${projectPrefix}-staging`, {
         env: {
           account: stagingAccountId,
@@ -35,7 +35,7 @@ export class CoreProdPipelineStack extends cdk.Stack {
       }),
     )
 
-    pipeline.cdkPipeline.addApplicationStage(
+    pipeline.cdkPipeline.addStage(
       new CoreStage(this, `${projectPrefix}-prod`, {
         env: {
           account: prodAccountId,
