@@ -1,4 +1,5 @@
-import * as cdk from "@aws-cdk/core"
+import * as constructs from "constructs"
+import * as cdk from "aws-cdk-lib"
 import { tagResources } from "@liflig/cdk"
 
 export const buildAccountId = "001112238813"
@@ -8,7 +9,7 @@ export const prodAccountId = "001112238813"
 
 export const projectPrefix = "cdkappref"
 
-export function applyTags(scope: cdk.Construct) {
+export function applyTags(scope: constructs.Construct) {
   tagResources(scope, (stack) => ({
     StackName: stack.stackName,
     Project: "liflig-cdk-app-reference",

@@ -1,5 +1,6 @@
-import * as ssm from "@aws-cdk/aws-ssm"
-import * as cdk from "@aws-cdk/core"
+import * as constructs from "constructs"
+import * as ssm from "aws-cdk-lib/aws-ssm"
+import * as cdk from "aws-cdk-lib"
 import { projectPrefix } from "../config"
 
 interface Props extends cdk.StackProps {
@@ -7,7 +8,7 @@ interface Props extends cdk.StackProps {
 }
 
 export class CoreStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props: Props) {
+  constructor(scope: constructs.Construct, id: string, props: Props) {
     super(scope, id, props)
 
     new ssm.StringParameter(this, "ExampleResource", {

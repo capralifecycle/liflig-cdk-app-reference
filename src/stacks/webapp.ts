@@ -1,8 +1,9 @@
-import * as cf from "@aws-cdk/aws-cloudfront"
-import * as origins from "@aws-cdk/aws-cloudfront-origins"
-import * as s3 from "@aws-cdk/aws-s3"
-import * as ssm from "@aws-cdk/aws-ssm"
-import * as cdk from "@aws-cdk/core"
+import * as constructs from "constructs"
+import * as cf from "aws-cdk-lib/aws-cloudfront"
+import * as origins from "aws-cdk-lib/aws-cloudfront-origins"
+import * as s3 from "aws-cdk-lib/aws-s3"
+import * as ssm from "aws-cdk-lib/aws-ssm"
+import * as cdk from "aws-cdk-lib"
 import * as webappDeploy from "@capraconsulting/webapp-deploy-lambda"
 import { projectPrefix } from "../config"
 
@@ -12,7 +13,7 @@ interface Props extends cdk.StackProps {
 }
 
 export class WebappStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props: Props) {
+  constructor(scope: constructs.Construct, id: string, props: Props) {
     super(scope, id, props)
 
     // No Griid for incub yet.

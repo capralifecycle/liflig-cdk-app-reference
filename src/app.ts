@@ -1,4 +1,4 @@
-import * as cdk from "@aws-cdk/core"
+import * as cdk from "aws-cdk-lib"
 import { applyTags, buildAccountId, projectPrefix } from "./config"
 import { CoreDevPipelineStack } from "./pipelines/core-dev"
 import { CoreProdPipelineStack } from "./pipelines/core-prod"
