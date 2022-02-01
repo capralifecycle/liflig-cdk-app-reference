@@ -1,4 +1,5 @@
-import * as cdk from "@aws-cdk/core"
+import * as constructs from "constructs"
+import * as cdk from "aws-cdk-lib"
 import { applyTags } from "../config"
 import { CoreStack } from "../stacks/core"
 import { WebappStack } from "../stacks/webapp"
@@ -9,7 +10,7 @@ interface Props extends cdk.StageProps {
 }
 
 export class CoreStage extends cdk.Stage {
-  constructor(scope: cdk.Construct, id: string, props: Props) {
+  constructor(scope: constructs.Construct, id: string, props: Props) {
     super(scope, id, props)
 
     applyTags(this)
