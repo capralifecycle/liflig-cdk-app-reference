@@ -507,37 +507,7 @@
               "Effect": "Allow",
               "Resource": {
                 "Fn::GetAtt": [
-                  "PipelineCodePipelineBuildGenerateCloudAssemblyCodePipelineActionRole3EB0ED91",
-                  "Arn"
-                ]
-              }
-            },
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "PipelineCodePipelineUpdatePipelineSelfMutateCodePipelineActionRole16D29A61",
-                  "Arn"
-                ]
-              }
-            },
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "PipelineCodePipelineAssetsFileAsset1CodePipelineActionRoleD7717BFB",
-                  "Arn"
-                ]
-              }
-            },
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "PipelineCodePipelineAssetsFileAsset2CodePipelineActionRole390B517C",
+                  "PipelineCdkPipelineCodeBuildActionRole1C961342",
                   "Arn"
                 ]
               }
@@ -672,7 +642,7 @@
                 ],
                 "RoleArn": {
                   "Fn::GetAtt": [
-                    "PipelineCodePipelineBuildGenerateCloudAssemblyCodePipelineActionRole3EB0ED91",
+                    "PipelineCdkPipelineCodeBuildActionRole1C961342",
                     "Arn"
                   ]
                 },
@@ -704,7 +674,7 @@
                 "Name": "SelfMutate",
                 "RoleArn": {
                   "Fn::GetAtt": [
-                    "PipelineCodePipelineUpdatePipelineSelfMutateCodePipelineActionRole16D29A61",
+                    "PipelineCdkPipelineCodeBuildActionRole1C961342",
                     "Arn"
                   ]
                 },
@@ -735,7 +705,7 @@
                 "Name": "FileAsset1",
                 "RoleArn": {
                   "Fn::GetAtt": [
-                    "PipelineCodePipelineAssetsFileAsset1CodePipelineActionRoleD7717BFB",
+                    "PipelineCdkPipelineCodeBuildActionRole1C961342",
                     "Arn"
                   ]
                 },
@@ -761,7 +731,7 @@
                 "Name": "FileAsset2",
                 "RoleArn": {
                   "Fn::GetAtt": [
-                    "PipelineCodePipelineAssetsFileAsset2CodePipelineActionRole390B517C",
+                    "PipelineCdkPipelineCodeBuildActionRole1C961342",
                     "Arn"
                   ]
                 },
@@ -1169,12 +1139,28 @@
             {
               "Action": "lambda:InvokeFunction",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "PipelinePrepareCdkSourceFnF78E92C9",
-                  "Arn"
-                ]
-              }
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelinePrepareCdkSourceFnF78E92C9",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelinePrepareCdkSourceFnF78E92C9",
+                          "Arn"
+                        ]
+                      },
+                      ":*"
+                    ]
+                  ]
+                }
+              ]
             },
             {
               "Action": [
@@ -1451,13 +1437,18 @@
         "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CdkBuildProject/Resource"
       }
     },
-    "PipelineCodePipelineBuildGenerateCloudAssemblyCodePipelineActionRole3EB0ED91": {
+    "PipelineCdkPipelineCodeBuildActionRole1C961342": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
             {
               "Action": "sts:AssumeRole",
+              "Condition": {
+                "Bool": {
+                  "aws:ViaAWSService": "codepipeline.amazonaws.com"
+                }
+              },
               "Effect": "Allow",
               "Principal": {
                 "AWS": {
@@ -1476,13 +1467,27 @@
             }
           ],
           "Version": "2012-10-17"
-        }
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
       },
       "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CodePipelineActionRole/Resource"
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/CodeBuildActionRole/Resource"
       }
     },
-    "PipelineCodePipelineBuildGenerateCloudAssemblyCodePipelineActionRoleDefaultPolicy49026C91": {
+    "PipelineCdkPipelineCodeBuildActionRoleDefaultPolicy0A4D4386": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyDocument": {
@@ -1500,57 +1505,7 @@
                   "Arn"
                 ]
               }
-            }
-          ],
-          "Version": "2012-10-17"
-        },
-        "PolicyName": "PipelineCodePipelineBuildGenerateCloudAssemblyCodePipelineActionRoleDefaultPolicy49026C91",
-        "Roles": [
-          {
-            "Ref": "PipelineCodePipelineBuildGenerateCloudAssemblyCodePipelineActionRole3EB0ED91"
-          }
-        ]
-      },
-      "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CodePipelineActionRole/DefaultPolicy/Resource"
-      }
-    },
-    "PipelineCodePipelineUpdatePipelineSelfMutateCodePipelineActionRole16D29A61": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":iam::001112238813:root"
-                    ]
-                  ]
-                }
-              }
-            }
-          ],
-          "Version": "2012-10-17"
-        }
-      },
-      "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/UpdatePipeline/SelfMutate/CodePipelineActionRole/Resource"
-      }
-    },
-    "PipelineCodePipelineUpdatePipelineSelfMutateCodePipelineActionRoleDefaultPolicyAA04AE0A": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
+            },
             {
               "Action": [
                 "codebuild:BatchGetBuilds",
@@ -1564,57 +1519,7 @@
                   "Arn"
                 ]
               }
-            }
-          ],
-          "Version": "2012-10-17"
-        },
-        "PolicyName": "PipelineCodePipelineUpdatePipelineSelfMutateCodePipelineActionRoleDefaultPolicyAA04AE0A",
-        "Roles": [
-          {
-            "Ref": "PipelineCodePipelineUpdatePipelineSelfMutateCodePipelineActionRole16D29A61"
-          }
-        ]
-      },
-      "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/UpdatePipeline/SelfMutate/CodePipelineActionRole/DefaultPolicy/Resource"
-      }
-    },
-    "PipelineCodePipelineAssetsFileAsset1CodePipelineActionRoleD7717BFB": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":iam::001112238813:root"
-                    ]
-                  ]
-                }
-              }
-            }
-          ],
-          "Version": "2012-10-17"
-        }
-      },
-      "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Assets/FileAsset1/CodePipelineActionRole/Resource"
-      }
-    },
-    "PipelineCodePipelineAssetsFileAsset1CodePipelineActionRoleDefaultPolicy5D55BF7B": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
+            },
             {
               "Action": [
                 "codebuild:BatchGetBuilds",
@@ -1628,57 +1533,7 @@
                   "Arn"
                 ]
               }
-            }
-          ],
-          "Version": "2012-10-17"
-        },
-        "PolicyName": "PipelineCodePipelineAssetsFileAsset1CodePipelineActionRoleDefaultPolicy5D55BF7B",
-        "Roles": [
-          {
-            "Ref": "PipelineCodePipelineAssetsFileAsset1CodePipelineActionRoleD7717BFB"
-          }
-        ]
-      },
-      "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Assets/FileAsset1/CodePipelineActionRole/DefaultPolicy/Resource"
-      }
-    },
-    "PipelineCodePipelineAssetsFileAsset2CodePipelineActionRole390B517C": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":iam::001112238813:root"
-                    ]
-                  ]
-                }
-              }
-            }
-          ],
-          "Version": "2012-10-17"
-        }
-      },
-      "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Assets/FileAsset2/CodePipelineActionRole/Resource"
-      }
-    },
-    "PipelineCodePipelineAssetsFileAsset2CodePipelineActionRoleDefaultPolicy4C6C8FD2": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
+            },
             {
               "Action": [
                 "codebuild:BatchGetBuilds",
@@ -1696,15 +1551,15 @@
           ],
           "Version": "2012-10-17"
         },
-        "PolicyName": "PipelineCodePipelineAssetsFileAsset2CodePipelineActionRoleDefaultPolicy4C6C8FD2",
+        "PolicyName": "PipelineCdkPipelineCodeBuildActionRoleDefaultPolicy0A4D4386",
         "Roles": [
           {
-            "Ref": "PipelineCodePipelineAssetsFileAsset2CodePipelineActionRole390B517C"
+            "Ref": "PipelineCdkPipelineCodeBuildActionRole1C961342"
           }
         ]
       },
       "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Assets/FileAsset2/CodePipelineActionRole/DefaultPolicy/Resource"
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/CodeBuildActionRole/DefaultPolicy/Resource"
       }
     },
     "PipelineCdkPipelineUpdatePipelineSelfMutationRole91D6CBA8": {
@@ -2072,11 +1927,9 @@
             {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::Sub": "arn:${AWS::Partition}:iam::001112238813:role/cdk-liflig-file-publishing-role-001112238813-eu-west-1"
-                }
-              ]
+              "Resource": {
+                "Fn::Sub": "arn:${AWS::Partition}:iam::001112238813:role/cdk-liflig-file-publishing-role-001112238813-eu-west-1"
+              }
             },
             {
               "Action": [
