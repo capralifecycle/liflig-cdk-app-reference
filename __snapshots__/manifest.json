@@ -185,52 +185,16 @@
             "data": "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProject45DF9DF3"
           }
         ],
-        "/cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CodePipelineActionRole/Resource": [
+        "/cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/CodeBuildActionRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineBuildGenerateCloudAssemblyCodePipelineActionRole3EB0ED91"
+            "data": "PipelineCdkPipelineCodeBuildActionRole1C961342"
           }
         ],
-        "/cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CodePipelineActionRole/DefaultPolicy/Resource": [
+        "/cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/CodeBuildActionRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineBuildGenerateCloudAssemblyCodePipelineActionRoleDefaultPolicy49026C91"
-          }
-        ],
-        "/cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/UpdatePipeline/SelfMutate/CodePipelineActionRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineUpdatePipelineSelfMutateCodePipelineActionRole16D29A61"
-          }
-        ],
-        "/cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/UpdatePipeline/SelfMutate/CodePipelineActionRole/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineUpdatePipelineSelfMutateCodePipelineActionRoleDefaultPolicyAA04AE0A"
-          }
-        ],
-        "/cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Assets/FileAsset1/CodePipelineActionRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineAssetsFileAsset1CodePipelineActionRoleD7717BFB"
-          }
-        ],
-        "/cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Assets/FileAsset1/CodePipelineActionRole/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineAssetsFileAsset1CodePipelineActionRoleDefaultPolicy5D55BF7B"
-          }
-        ],
-        "/cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Assets/FileAsset2/CodePipelineActionRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineAssetsFileAsset2CodePipelineActionRole390B517C"
-          }
-        ],
-        "/cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Assets/FileAsset2/CodePipelineActionRole/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineAssetsFileAsset2CodePipelineActionRoleDefaultPolicy4C6C8FD2"
+            "data": "PipelineCdkPipelineCodeBuildActionRoleDefaultPolicy0A4D4386"
           }
         ],
         "/cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/UpdatePipeline/SelfMutation/Role/Resource": [
@@ -454,52 +418,16 @@
             "data": "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProject45DF9DF3"
           }
         ],
-        "/cdkappref-build-core-prod-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CodePipelineActionRole/Resource": [
+        "/cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/CodeBuildActionRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineBuildGenerateCloudAssemblyCodePipelineActionRole3EB0ED91"
+            "data": "PipelineCdkPipelineCodeBuildActionRole1C961342"
           }
         ],
-        "/cdkappref-build-core-prod-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CodePipelineActionRole/DefaultPolicy/Resource": [
+        "/cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/CodeBuildActionRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineBuildGenerateCloudAssemblyCodePipelineActionRoleDefaultPolicy49026C91"
-          }
-        ],
-        "/cdkappref-build-core-prod-pipeline/Pipeline/CodePipeline/UpdatePipeline/SelfMutate/CodePipelineActionRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineUpdatePipelineSelfMutateCodePipelineActionRole16D29A61"
-          }
-        ],
-        "/cdkappref-build-core-prod-pipeline/Pipeline/CodePipeline/UpdatePipeline/SelfMutate/CodePipelineActionRole/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineUpdatePipelineSelfMutateCodePipelineActionRoleDefaultPolicyAA04AE0A"
-          }
-        ],
-        "/cdkappref-build-core-prod-pipeline/Pipeline/CodePipeline/Assets/FileAsset1/CodePipelineActionRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineAssetsFileAsset1CodePipelineActionRoleD7717BFB"
-          }
-        ],
-        "/cdkappref-build-core-prod-pipeline/Pipeline/CodePipeline/Assets/FileAsset1/CodePipelineActionRole/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineAssetsFileAsset1CodePipelineActionRoleDefaultPolicy5D55BF7B"
-          }
-        ],
-        "/cdkappref-build-core-prod-pipeline/Pipeline/CodePipeline/Assets/FileAsset2/CodePipelineActionRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineAssetsFileAsset2CodePipelineActionRole390B517C"
-          }
-        ],
-        "/cdkappref-build-core-prod-pipeline/Pipeline/CodePipeline/Assets/FileAsset2/CodePipelineActionRole/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "PipelineCodePipelineAssetsFileAsset2CodePipelineActionRoleDefaultPolicy4C6C8FD2"
+            "data": "PipelineCdkPipelineCodeBuildActionRoleDefaultPolicy0A4D4386"
           }
         ],
         "/cdkappref-build-core-prod-pipeline/Pipeline/CdkPipeline/UpdatePipeline/SelfMutation/Role/Resource": [
