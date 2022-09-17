@@ -10,7 +10,7 @@
     "snapshots": "rm -rf cdk.out __snapshots__ && IS_SNAPSHOT=true cdk synth && cdk-create-snapshots"
   },
   "devDependencies": {
-    "@types/node": "16.11.58",
+    "@types/node": "16.11.59",
     "@typescript-eslint/eslint-plugin": "5.37.0",
     "@typescript-eslint/parser": "5.37.0",
     "aws-cdk": "2.36.0",
