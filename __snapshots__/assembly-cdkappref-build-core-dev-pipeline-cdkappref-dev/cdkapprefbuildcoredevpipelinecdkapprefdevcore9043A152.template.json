@@ -1,0 +1,69 @@
+{
+  "Resources": {
+    "ExampleResourceAC53F4AE": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Type": "String",
+        "Value": "dev",
+        "Tags": {
+          "Project": "liflig-cdk-app-reference",
+          "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
+          "StackName": "cdkappref-dev-core"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/core/ExampleResource/Resource"
+      }
+    },
+    "DemoParam641CC643": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Type": "String",
+        "Value": "hello world",
+        "Name": "/cdkappref/dev/demo",
+        "Tags": {
+          "Project": "liflig-cdk-app-reference",
+          "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
+          "StackName": "cdkappref-dev-core"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/core/DemoParam/Resource"
+      }
+    }
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/cdk-bootstrap/liflig/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+    }
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                  ],
+                  {
+                    "Ref": "BootstrapVersion"
+                  }
+                ]
+              }
+            ]
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+        }
+      ]
+    }
+  }
+}
