@@ -39,7 +39,9 @@ buildConfig(
       }
 
       stage("Verify CDK snapshots") {
-        verifyCdkSnapshots
+        verifyCdkSnapshots(
+          snapshotCommand: "yarn run snapshots"
+        )
       }
 
       def bucketKey
