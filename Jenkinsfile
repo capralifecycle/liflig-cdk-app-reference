@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 // See https://github.com/capralifecycle/jenkins-pipeline-library
-@Library("cals") _
+@Library("cals@add-cdk-snapshot-verification") _
 
 def pipelines = new no.capraconsulting.buildtools.lifligcdkpipelines.LifligCdkPipelines()
 
@@ -39,11 +39,7 @@ buildConfig(
       }
 
       stage("Verify CDK snapshots") {
-        sh """
-          npm run snapshots
-          git status
-          git diff --exit-code
-        """
+        verifyCdkSnapshots
       }
 
       def bucketKey
