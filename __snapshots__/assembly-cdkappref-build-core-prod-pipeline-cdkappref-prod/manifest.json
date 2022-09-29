@@ -189,16 +189,16 @@
             "data": "WebappDeploy4D661524"
           }
         ],
-        "/cdkappref-build-core-prod-pipeline/cdkappref-prod/webapp/WebappDeploy/CustomResource/CustomResourcePolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "WebappDeployCustomResourceCustomResourcePolicyB85F7B61"
-          }
-        ],
         "/cdkappref-build-core-prod-pipeline/cdkappref-prod/webapp/WebappDeploy/CustomResource/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "WebappDeployCustomResourceCF959726"
+          }
+        ],
+        "/cdkappref-build-core-prod-pipeline/cdkappref-prod/webapp/WebappDeploy/CustomResource/CustomResourcePolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WebappDeployCustomResourceCustomResourcePolicyB85F7B61"
           }
         ],
         "/cdkappref-build-core-prod-pipeline/cdkappref-prod/webapp/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [

@@ -378,35 +378,6 @@
         "aws:asset:property": "Code"
       }
     },
-    "WebappDeployCustomResourceCustomResourcePolicyB85F7B61": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "lambda:InvokeFunction",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "WebappDeploy4D661524",
-                  "Arn"
-                ]
-              }
-            }
-          ],
-          "Version": "2012-10-17"
-        },
-        "PolicyName": "WebappDeployCustomResourceCustomResourcePolicyB85F7B61",
-        "Roles": [
-          {
-            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
-          }
-        ]
-      },
-      "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/CustomResource/CustomResourcePolicy/Resource"
-      }
-    },
     "WebappDeployCustomResourceCF959726": {
       "Type": "Custom::AWS",
       "Properties": {
@@ -449,6 +420,35 @@
       "DeletionPolicy": "Delete",
       "Metadata": {
         "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/CustomResource/Resource/Default"
+      }
+    },
+    "WebappDeployCustomResourceCustomResourcePolicyB85F7B61": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "WebappDeploy4D661524",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "WebappDeployCustomResourceCustomResourcePolicyB85F7B61",
+        "Roles": [
+          {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/CustomResource/CustomResourcePolicy/Resource"
       }
     },
     "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
