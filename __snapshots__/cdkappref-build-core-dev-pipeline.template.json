@@ -1,0 +1,2130 @@
+{
+  "Resources": {
+    "PipelinePrepareCdkSourceFnServiceRole4C7FA4DB": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+              ]
+            ]
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/PrepareCdkSourceFn/ServiceRole/Resource"
+      }
+    },
+    "PipelinePrepareCdkSourceFnServiceRoleDefaultPolicy49183F3C": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ssm:GetParametersByPath",
+              "Effect": "Allow",
+              "Resource": "arn:aws:ssm:eu-west-1:001112238813:parameter/liflig-cdk/*/pipeline-variables/*"
+            },
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+                "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::incub-common-build-artifacts-001112238813-eu-west-1"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::incub-common-build-artifacts-001112238813-eu-west-1/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "codepipeline:PutJobSuccessResult",
+                "codepipeline:PutJobFailureResult"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelinePrepareCdkSourceFnServiceRoleDefaultPolicy49183F3C",
+        "Roles": [
+          {
+            "Ref": "PipelinePrepareCdkSourceFnServiceRole4C7FA4DB"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/PrepareCdkSourceFn/ServiceRole/DefaultPolicy/Resource"
+      }
+    },
+    "PipelinePrepareCdkSourceFnF78E92C9": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-liflig-assets-001112238813-eu-west-1",
+          "S3Key": "snapshot-value.zip"
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "PipelinePrepareCdkSourceFnServiceRole4C7FA4DB",
+            "Arn"
+          ]
+        },
+        "Handler": "index.handler",
+        "MemorySize": 512,
+        "Runtime": "python3.8",
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ],
+        "Timeout": 60
+      },
+      "DependsOn": [
+        "PipelinePrepareCdkSourceFnServiceRoleDefaultPolicy49183F3C",
+        "PipelinePrepareCdkSourceFnServiceRole4C7FA4DB"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/PrepareCdkSourceFn/Resource",
+        "aws:asset:path": "asset.snapshot-value",
+        "aws:asset:is-bundled": false,
+        "aws:asset:property": "Code"
+      }
+    },
+    "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE": {
+      "Type": "AWS::KMS::Key",
+      "Properties": {
+        "KeyPolicy": {
+          "Statement": [
+            {
+              "Action": "kms:*",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:root"
+                    ]
+                  ]
+                }
+              },
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey"
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:role/cdk-liflig-deploy-role-001112238813-eu-west-1"
+                    ]
+                  ]
+                }
+              },
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/ArtifactsBucketEncryptionKey/Resource"
+      }
+    },
+    "PipelineCodePipelineArtifactsBucketEncryptionKeyAlias3EF3F23B": {
+      "Type": "AWS::KMS::Alias",
+      "Properties": {
+        "AliasName": "alias/codepipeline-cdkapprefbuildcoredevpipelinepipelinecodepipelineae3089f8",
+        "TargetKeyId": {
+          "Fn::GetAtt": [
+            "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+            "Arn"
+          ]
+        }
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/ArtifactsBucketEncryptionKeyAlias/Resource"
+      }
+    },
+    "PipelineCodePipelineArtifactsBucket9E5E7047": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "KMSMasterKeyID": {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+                    "Arn"
+                  ]
+                },
+                "SSEAlgorithm": "aws:kms"
+              }
+            }
+          ]
+        },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/ArtifactsBucket/Resource"
+      }
+    },
+    "PipelineCodePipelineArtifactsBucketPolicyDD5F42B2": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "PipelineCodePipelineArtifactsBucket9E5E7047"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false"
+                }
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*"
+              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineArtifactsBucket9E5E7047",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineCodePipelineArtifactsBucket9E5E7047",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*"
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:role/cdk-liflig-deploy-role-001112238813-eu-west-1"
+                    ]
+                  ]
+                }
+              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineArtifactsBucket9E5E7047",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineCodePipelineArtifactsBucket9E5E7047",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/ArtifactsBucket/Policy/Resource"
+      }
+    },
+    "PipelineCodePipelineRoleEE058E60": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codepipeline.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Role/Resource"
+      }
+    },
+    "PipelineCodePipelineRoleDefaultPolicy37C67326": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+                "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineArtifactsBucket9E5E7047",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineCodePipelineArtifactsBucket9E5E7047",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelineSourcesourceCodePipelineActionRoleAB26C0AE",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelinePrepareCdkSourcepreparecdksourceCodePipelineActionRole271DB5CA",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCdkPipelineCodeBuildActionRole1C961342",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":iam::001112238813:role/cdk-liflig-deploy-role-001112238813-eu-west-1"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineCodePipelineRoleDefaultPolicy37C67326",
+        "Roles": [
+          {
+            "Ref": "PipelineCodePipelineRoleEE058E60"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Role/DefaultPolicy/Resource"
+      }
+    },
+    "PipelineCodePipeline4FC0E9B7": {
+      "Type": "AWS::CodePipeline::Pipeline",
+      "Properties": {
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "PipelineCodePipelineRoleEE058E60",
+            "Arn"
+          ]
+        },
+        "Stages": [
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
+                  "Category": "Source",
+                  "Owner": "AWS",
+                  "Provider": "S3",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "S3Bucket": "incub-common-build-artifacts-001112238813-eu-west-1",
+                  "S3ObjectKey": "pipelines/cdkappref-core-dev/trigger"
+                },
+                "Name": "source",
+                "OutputArtifacts": [
+                  {
+                    "Name": "Artifact_Source_source"
+                  }
+                ],
+                "RoleArn": {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineSourcesourceCodePipelineActionRoleAB26C0AE",
+                    "Arn"
+                  ]
+                },
+                "RunOrder": 1
+              }
+            ],
+            "Name": "Source"
+          },
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
+                  "Category": "Invoke",
+                  "Owner": "AWS",
+                  "Provider": "Lambda",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "FunctionName": {
+                    "Ref": "PipelinePrepareCdkSourceFnF78E92C9"
+                  },
+                  "UserParameters": "{\"bucketName\":\"incub-common-build-artifacts-001112238813-eu-west-1\",\"prefix\":\"pipelines/cdkappref-core-dev/\",\"parametersNamespace\":\"default\"}"
+                },
+                "Name": "prepare-cdk-source",
+                "OutputArtifacts": [
+                  {
+                    "Name": "Artifact_PrepareCdkSource_prepare-cdk-source"
+                  }
+                ],
+                "RoleArn": {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelinePrepareCdkSourcepreparecdksourceCodePipelineActionRole271DB5CA",
+                    "Arn"
+                  ]
+                },
+                "RunOrder": 1
+              }
+            ],
+            "Name": "PrepareCdkSource"
+          },
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
+                  "Category": "Build",
+                  "Owner": "AWS",
+                  "Provider": "CodeBuild",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "ProjectName": {
+                    "Ref": "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProject45DF9DF3"
+                  },
+                  "EnvironmentVariables": "[{\"name\":\"_PROJECT_CONFIG_HASH\",\"type\":\"PLAINTEXT\",\"value\":\"snapshot-value\"}]"
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "Artifact_PrepareCdkSource_prepare-cdk-source"
+                  }
+                ],
+                "Name": "GenerateCloudAssembly",
+                "OutputArtifacts": [
+                  {
+                    "Name": "GenerateCloudAssembly_Output"
+                  }
+                ],
+                "RoleArn": {
+                  "Fn::GetAtt": [
+                    "PipelineCdkPipelineCodeBuildActionRole1C961342",
+                    "Arn"
+                  ]
+                },
+                "RunOrder": 1
+              }
+            ],
+            "Name": "Build"
+          },
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
+                  "Category": "Build",
+                  "Owner": "AWS",
+                  "Provider": "CodeBuild",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "ProjectName": {
+                    "Ref": "PipelineCdkPipelineUpdatePipelineSelfMutation3D8B717E"
+                  },
+                  "EnvironmentVariables": "[{\"name\":\"_PROJECT_CONFIG_HASH\",\"type\":\"PLAINTEXT\",\"value\":\"snapshot-value\"}]"
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "GenerateCloudAssembly_Output"
+                  }
+                ],
+                "Name": "SelfMutate",
+                "RoleArn": {
+                  "Fn::GetAtt": [
+                    "PipelineCdkPipelineCodeBuildActionRole1C961342",
+                    "Arn"
+                  ]
+                },
+                "RunOrder": 1
+              }
+            ],
+            "Name": "UpdatePipeline"
+          },
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
+                  "Category": "Build",
+                  "Owner": "AWS",
+                  "Provider": "CodeBuild",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "ProjectName": {
+                    "Ref": "PipelineCdkPipelineAssetsFileAsset151D3981E"
+                  }
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "GenerateCloudAssembly_Output"
+                  }
+                ],
+                "Name": "FileAsset1",
+                "RoleArn": {
+                  "Fn::GetAtt": [
+                    "PipelineCdkPipelineCodeBuildActionRole1C961342",
+                    "Arn"
+                  ]
+                },
+                "RunOrder": 1
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Build",
+                  "Owner": "AWS",
+                  "Provider": "CodeBuild",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "ProjectName": {
+                    "Ref": "PipelineCdkPipelineAssetsFileAsset2207E4C42"
+                  }
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "GenerateCloudAssembly_Output"
+                  }
+                ],
+                "Name": "FileAsset2",
+                "RoleArn": {
+                  "Fn::GetAtt": [
+                    "PipelineCdkPipelineCodeBuildActionRole1C961342",
+                    "Arn"
+                  ]
+                },
+                "RunOrder": 1
+              }
+            ],
+            "Name": "Assets"
+          },
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "StackName": "cdkappref-dev-core",
+                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                  "RoleArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":iam::001112238813:role/cdk-liflig-cfn-exec-role-001112238813-eu-west-1"
+                      ]
+                    ]
+                  },
+                  "TemplateConfiguration": "GenerateCloudAssembly_Output::assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevcore9043A152.template.json.config.json",
+                  "ActionMode": "CHANGE_SET_REPLACE",
+                  "ChangeSetName": "PipelineChange",
+                  "TemplatePath": "GenerateCloudAssembly_Output::assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevcore9043A152.template.json"
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "GenerateCloudAssembly_Output"
+                  }
+                ],
+                "Name": "core.Prepare",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:role/cdk-liflig-deploy-role-001112238813-eu-west-1"
+                    ]
+                  ]
+                },
+                "RunOrder": 1
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "StackName": "cdkappref-dev-webapp",
+                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                  "RoleArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":iam::001112238813:role/cdk-liflig-cfn-exec-role-001112238813-eu-west-1"
+                      ]
+                    ]
+                  },
+                  "TemplateConfiguration": "GenerateCloudAssembly_Output::assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.template.json.config.json",
+                  "ActionMode": "CHANGE_SET_REPLACE",
+                  "ChangeSetName": "PipelineChange",
+                  "TemplatePath": "GenerateCloudAssembly_Output::assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.template.json"
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "GenerateCloudAssembly_Output"
+                  }
+                ],
+                "Name": "webapp.Prepare",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:role/cdk-liflig-deploy-role-001112238813-eu-west-1"
+                    ]
+                  ]
+                },
+                "RunOrder": 1
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "StackName": "cdkappref-dev-core",
+                  "ActionMode": "CHANGE_SET_EXECUTE",
+                  "ChangeSetName": "PipelineChange"
+                },
+                "Name": "core.Deploy",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:role/cdk-liflig-deploy-role-001112238813-eu-west-1"
+                    ]
+                  ]
+                },
+                "RunOrder": 2
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "StackName": "cdkappref-dev-webapp",
+                  "ActionMode": "CHANGE_SET_EXECUTE",
+                  "ChangeSetName": "PipelineChange"
+                },
+                "Name": "webapp.Deploy",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:role/cdk-liflig-deploy-role-001112238813-eu-west-1"
+                    ]
+                  ]
+                },
+                "RunOrder": 2
+              }
+            ],
+            "Name": "cdkappref-dev"
+          }
+        ],
+        "ArtifactStore": {
+          "EncryptionKey": {
+            "Id": {
+              "Fn::GetAtt": [
+                "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+                "Arn"
+              ]
+            },
+            "Type": "KMS"
+          },
+          "Location": {
+            "Ref": "PipelineCodePipelineArtifactsBucket9E5E7047"
+          },
+          "Type": "S3"
+        },
+        "Name": "cdkappref-core-dev",
+        "RestartExecutionOnUpdate": true,
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "DependsOn": [
+        "PipelineCodePipelineRoleDefaultPolicy37C67326",
+        "PipelineCodePipelineRoleEE058E60"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Resource"
+      }
+    },
+    "PipelineCodePipelineSourcesourceCodePipelineActionRoleAB26C0AE": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:root"
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Source/source/CodePipelineActionRole/Resource"
+      }
+    },
+    "PipelineCodePipelineSourcesourceCodePipelineActionRoleDefaultPolicy7825EAF4": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::incub-common-build-artifacts-001112238813-eu-west-1"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::incub-common-build-artifacts-001112238813-eu-west-1/pipelines/cdkappref-core-dev/trigger"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "s3:DeleteObject*",
+                "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineArtifactsBucket9E5E7047",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineCodePipelineArtifactsBucket9E5E7047",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*",
+                "kms:Decrypt"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineCodePipelineSourcesourceCodePipelineActionRoleDefaultPolicy7825EAF4",
+        "Roles": [
+          {
+            "Ref": "PipelineCodePipelineSourcesourceCodePipelineActionRoleAB26C0AE"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Source/source/CodePipelineActionRole/DefaultPolicy/Resource"
+      }
+    },
+    "PipelineCodePipelinePrepareCdkSourcepreparecdksourceCodePipelineActionRole271DB5CA": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:root"
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/PrepareCdkSource/prepare-cdk-source/CodePipelineActionRole/Resource"
+      }
+    },
+    "PipelineCodePipelinePrepareCdkSourcepreparecdksourceCodePipelineActionRoleDefaultPolicyC1327038": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "lambda:ListFunctions",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelinePrepareCdkSourceFnF78E92C9",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelinePrepareCdkSourceFnF78E92C9",
+                          "Arn"
+                        ]
+                      },
+                      ":*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "s3:DeleteObject*",
+                "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineArtifactsBucket9E5E7047",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineCodePipelineArtifactsBucket9E5E7047",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*",
+                "kms:Decrypt"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineCodePipelinePrepareCdkSourcepreparecdksourceCodePipelineActionRoleDefaultPolicyC1327038",
+        "Roles": [
+          {
+            "Ref": "PipelineCodePipelinePrepareCdkSourcepreparecdksourceCodePipelineActionRole271DB5CA"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/PrepareCdkSource/prepare-cdk-source/CodePipelineActionRole/DefaultPolicy/Resource"
+      }
+    },
+    "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProjectRole5D5FB735": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codebuild.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CdkBuildProject/Role/Resource"
+      }
+    },
+    "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProjectRoleDefaultPolicy027A12A1": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":logs:eu-west-1:001112238813:log-group:/aws/codebuild/",
+                      {
+                        "Ref": "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProject45DF9DF3"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":logs:eu-west-1:001112238813:log-group:/aws/codebuild/",
+                      {
+                        "Ref": "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProject45DF9DF3"
+                      },
+                      ":*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "codebuild:CreateReportGroup",
+                "codebuild:CreateReport",
+                "codebuild:UpdateReport",
+                "codebuild:BatchPutTestCases",
+                "codebuild:BatchPutCodeCoverages"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":codebuild:eu-west-1:001112238813:report-group/",
+                    {
+                      "Ref": "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProject45DF9DF3"
+                    },
+                    "-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+                "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineArtifactsBucket9E5E7047",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineCodePipelineArtifactsBucket9E5E7047",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProjectRoleDefaultPolicy027A12A1",
+        "Roles": [
+          {
+            "Ref": "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProjectRole5D5FB735"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CdkBuildProject/Role/DefaultPolicy/Resource"
+      }
+    },
+    "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProject45DF9DF3": {
+      "Type": "AWS::CodeBuild::Project",
+      "Properties": {
+        "Artifacts": {
+          "Type": "CODEPIPELINE"
+        },
+        "Environment": {
+          "ComputeType": "BUILD_GENERAL1_SMALL",
+          "Image": "aws/codebuild/standard:5.0",
+          "ImagePullCredentialsType": "CODEBUILD",
+          "PrivilegedMode": false,
+          "Type": "LINUX_CONTAINER"
+        },
+        "ServiceRole": {
+          "Fn::GetAtt": [
+            "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProjectRole5D5FB735",
+            "Arn"
+          ]
+        },
+        "Source": {
+          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm ci\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"npx cdk synth\"\n      ]\n    }\n  },\n  \"artifacts\": {\n    \"base-directory\": \"cdk.out\",\n    \"files\": \"**/*\"\n  }\n}",
+          "Type": "CODEPIPELINE"
+        },
+        "Cache": {
+          "Type": "NO_CACHE"
+        },
+        "Description": "Pipeline step cdkappref-build-core-dev-pipeline/CodePipeline/Build/GenerateCloudAssembly",
+        "EncryptionKey": {
+          "Fn::GetAtt": [
+            "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+            "Arn"
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CdkBuildProject/Resource"
+      }
+    },
+    "PipelineCdkPipelineCodeBuildActionRole1C961342": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "Bool": {
+                  "aws:ViaAWSService": "codepipeline.amazonaws.com"
+                }
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:root"
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/CodeBuildActionRole/Resource"
+      }
+    },
+    "PipelineCdkPipelineCodeBuildActionRoleDefaultPolicy0A4D4386": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "codebuild:BatchGetBuilds",
+                "codebuild:StartBuild",
+                "codebuild:StopBuild"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProject45DF9DF3",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": [
+                "codebuild:BatchGetBuilds",
+                "codebuild:StartBuild",
+                "codebuild:StopBuild"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCdkPipelineUpdatePipelineSelfMutation3D8B717E",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": [
+                "codebuild:BatchGetBuilds",
+                "codebuild:StartBuild",
+                "codebuild:StopBuild"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCdkPipelineAssetsFileAsset151D3981E",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": [
+                "codebuild:BatchGetBuilds",
+                "codebuild:StartBuild",
+                "codebuild:StopBuild"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCdkPipelineAssetsFileAsset2207E4C42",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineCdkPipelineCodeBuildActionRoleDefaultPolicy0A4D4386",
+        "Roles": [
+          {
+            "Ref": "PipelineCdkPipelineCodeBuildActionRole1C961342"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/CodeBuildActionRole/DefaultPolicy/Resource"
+      }
+    },
+    "PipelineCdkPipelineUpdatePipelineSelfMutationRole91D6CBA8": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codebuild.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/UpdatePipeline/SelfMutation/Role/Resource"
+      }
+    },
+    "PipelineCdkPipelineUpdatePipelineSelfMutationRoleDefaultPolicy128B1173": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":logs:eu-west-1:001112238813:log-group:/aws/codebuild/",
+                      {
+                        "Ref": "PipelineCdkPipelineUpdatePipelineSelfMutation3D8B717E"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":logs:eu-west-1:001112238813:log-group:/aws/codebuild/",
+                      {
+                        "Ref": "PipelineCdkPipelineUpdatePipelineSelfMutation3D8B717E"
+                      },
+                      ":*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "codebuild:CreateReportGroup",
+                "codebuild:CreateReport",
+                "codebuild:UpdateReport",
+                "codebuild:BatchPutTestCases",
+                "codebuild:BatchPutCodeCoverages"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":codebuild:eu-west-1:001112238813:report-group/",
+                    {
+                      "Ref": "PipelineCdkPipelineUpdatePipelineSelfMutation3D8B717E"
+                    },
+                    "-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "ForAnyValue:StringEquals": {
+                  "iam:ResourceTag/aws-cdk:bootstrap-role": [
+                    "image-publishing",
+                    "file-publishing",
+                    "deploy"
+                  ]
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "arn:*:iam::001112238813:role/*"
+            },
+            {
+              "Action": "cloudformation:DescribeStacks",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "s3:ListBucket",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineArtifactsBucket9E5E7047",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineCodePipelineArtifactsBucket9E5E7047",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineCdkPipelineUpdatePipelineSelfMutationRoleDefaultPolicy128B1173",
+        "Roles": [
+          {
+            "Ref": "PipelineCdkPipelineUpdatePipelineSelfMutationRole91D6CBA8"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/UpdatePipeline/SelfMutation/Role/DefaultPolicy/Resource"
+      }
+    },
+    "PipelineCdkPipelineUpdatePipelineSelfMutation3D8B717E": {
+      "Type": "AWS::CodeBuild::Project",
+      "Properties": {
+        "Artifacts": {
+          "Type": "CODEPIPELINE"
+        },
+        "Environment": {
+          "ComputeType": "BUILD_GENERAL1_SMALL",
+          "Image": "aws/codebuild/standard:5.0",
+          "ImagePullCredentialsType": "CODEBUILD",
+          "PrivilegedMode": false,
+          "Type": "LINUX_CONTAINER"
+        },
+        "ServiceRole": {
+          "Fn::GetAtt": [
+            "PipelineCdkPipelineUpdatePipelineSelfMutationRole91D6CBA8",
+            "Arn"
+          ]
+        },
+        "Source": {
+          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g aws-cdk@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk -a . deploy cdkappref-build-core-dev-pipeline --require-approval=never --verbose\"\n      ]\n    }\n  }\n}",
+          "Type": "CODEPIPELINE"
+        },
+        "Cache": {
+          "Type": "NO_CACHE"
+        },
+        "Description": "Pipeline step cdkappref-build-core-dev-pipeline/CodePipeline/UpdatePipeline/SelfMutate",
+        "EncryptionKey": {
+          "Fn::GetAtt": [
+            "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+            "Arn"
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/UpdatePipeline/SelfMutation/Resource"
+      }
+    },
+    "PipelineCdkPipelineAssetsFileRole0474FB57": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codebuild.amazonaws.com"
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::001112238813:root"
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/Assets/FileRole/Resource"
+      }
+    },
+    "PipelineCdkPipelineAssetsFileRoleDefaultPolicy2EB63D68": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":logs:eu-west-1:001112238813:log-group:/aws/codebuild/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "codebuild:CreateReportGroup",
+                "codebuild:CreateReport",
+                "codebuild:UpdateReport",
+                "codebuild:BatchPutTestCases",
+                "codebuild:BatchPutCodeCoverages"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":codebuild:eu-west-1:001112238813:report-group/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "codebuild:BatchGetBuilds",
+                "codebuild:StartBuild",
+                "codebuild:StopBuild"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Sub": "arn:${AWS::Partition}:iam::001112238813:role/cdk-liflig-file-publishing-role-001112238813-eu-west-1"
+              }
+            },
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineArtifactsBucket9E5E7047",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineCodePipelineArtifactsBucket9E5E7047",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineCdkPipelineAssetsFileRoleDefaultPolicy2EB63D68",
+        "Roles": [
+          {
+            "Ref": "PipelineCdkPipelineAssetsFileRole0474FB57"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/Assets/FileRole/DefaultPolicy/Resource"
+      }
+    },
+    "PipelineCdkPipelineAssetsFileAsset151D3981E": {
+      "Type": "AWS::CodeBuild::Project",
+      "Properties": {
+        "Artifacts": {
+          "Type": "CODEPIPELINE"
+        },
+        "Environment": {
+          "ComputeType": "BUILD_GENERAL1_SMALL",
+          "Image": "aws/codebuild/standard:5.0",
+          "ImagePullCredentialsType": "CODEBUILD",
+          "PrivilegedMode": false,
+          "Type": "LINUX_CONTAINER"
+        },
+        "ServiceRole": {
+          "Fn::GetAtt": [
+            "PipelineCdkPipelineAssetsFileRole0474FB57",
+            "Arn"
+          ]
+        },
+        "Source": {
+          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.assets.json\\\" --verbose publish \\\"snapshot-value:001112238813-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
+          "Type": "CODEPIPELINE"
+        },
+        "Cache": {
+          "Type": "NO_CACHE"
+        },
+        "Description": "Pipeline step cdkappref-build-core-dev-pipeline/CodePipeline/Assets/FileAsset1",
+        "EncryptionKey": {
+          "Fn::GetAtt": [
+            "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+            "Arn"
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/Assets/FileAsset1/Resource"
+      }
+    },
+    "PipelineCdkPipelineAssetsFileAsset2207E4C42": {
+      "Type": "AWS::CodeBuild::Project",
+      "Properties": {
+        "Artifacts": {
+          "Type": "CODEPIPELINE"
+        },
+        "Environment": {
+          "ComputeType": "BUILD_GENERAL1_SMALL",
+          "Image": "aws/codebuild/standard:5.0",
+          "ImagePullCredentialsType": "CODEBUILD",
+          "PrivilegedMode": false,
+          "Type": "LINUX_CONTAINER"
+        },
+        "ServiceRole": {
+          "Fn::GetAtt": [
+            "PipelineCdkPipelineAssetsFileRole0474FB57",
+            "Arn"
+          ]
+        },
+        "Source": {
+          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.assets.json\\\" --verbose publish \\\"snapshot-value:001112238813-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
+          "Type": "CODEPIPELINE"
+        },
+        "Cache": {
+          "Type": "NO_CACHE"
+        },
+        "Description": "Pipeline step cdkappref-build-core-dev-pipeline/CodePipeline/Assets/FileAsset2",
+        "EncryptionKey": {
+          "Fn::GetAtt": [
+            "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
+            "Arn"
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CdkPipeline/Assets/FileAsset2/Resource"
+      }
+    }
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/cdk-bootstrap/liflig/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+    }
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                  ],
+                  {
+                    "Ref": "BootstrapVersion"
+                  }
+                ]
+              }
+            ]
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+        }
+      ]
+    }
+  }
+}
