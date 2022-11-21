@@ -160,7 +160,7 @@
         "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/Distribution/Resource"
       }
     },
-    "WebappDeployServiceRole78F79841": {
+    "WebappDeployWebappDeployResourceServiceRole6D7BB70F": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -205,10 +205,10 @@
         ]
       },
       "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/Resource/ServiceRole/Resource"
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/WebappDeployResource/ServiceRole/Resource"
       }
     },
-    "WebappDeployServiceRoleDefaultPolicyE446530F": {
+    "WebappDeployWebappDeployResourceServiceRoleDefaultPolicy5CB528F1": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyDocument": {
@@ -292,18 +292,18 @@
           ],
           "Version": "2012-10-17"
         },
-        "PolicyName": "WebappDeployServiceRoleDefaultPolicyE446530F",
+        "PolicyName": "WebappDeployWebappDeployResourceServiceRoleDefaultPolicy5CB528F1",
         "Roles": [
           {
-            "Ref": "WebappDeployServiceRole78F79841"
+            "Ref": "WebappDeployWebappDeployResourceServiceRole6D7BB70F"
           }
         ]
       },
       "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/Resource/ServiceRole/DefaultPolicy/Resource"
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/WebappDeployResource/ServiceRole/DefaultPolicy/Resource"
       }
     },
-    "WebappDeploy4D661524": {
+    "WebappDeployWebappDeployResource568A3E18": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
@@ -312,7 +312,7 @@
         },
         "Role": {
           "Fn::GetAtt": [
-            "WebappDeployServiceRole78F79841",
+            "WebappDeployWebappDeployResourceServiceRole6D7BB70F",
             "Arn"
           ]
         },
@@ -368,90 +368,17 @@
         "Timeout": 120
       },
       "DependsOn": [
-        "WebappDeployServiceRoleDefaultPolicyE446530F",
-        "WebappDeployServiceRole78F79841"
+        "WebappDeployWebappDeployResourceServiceRoleDefaultPolicy5CB528F1",
+        "WebappDeployWebappDeployResourceServiceRole6D7BB70F"
       ],
       "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/Resource/Resource",
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/WebappDeployResource/Resource",
         "aws:asset:path": "asset.snapshot-value",
         "aws:asset:is-bundled": false,
         "aws:asset:property": "Code"
       }
     },
-    "WebappDeployCustomResourceCF959726": {
-      "Type": "Custom::AWS",
-      "Properties": {
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
-            "Arn"
-          ]
-        },
-        "Create": {
-          "Fn::Join": [
-            "",
-            [
-              "{\"service\":\"Lambda\",\"action\":\"invoke\",\"physicalResourceId\":{\"id\":\"webapp-deploy\"},\"parameters\":{\"FunctionName\":\"",
-              {
-                "Ref": "WebappDeploy4D661524"
-              },
-              "\",\"Payload\":\"{\\\"artifactS3Url\\\":\\\"s3://incub-common-build-artifacts-001112238813-eu-west-1/snapshot-value\\\"}\"}}"
-            ]
-          ]
-        },
-        "Update": {
-          "Fn::Join": [
-            "",
-            [
-              "{\"service\":\"Lambda\",\"action\":\"invoke\",\"physicalResourceId\":{\"id\":\"webapp-deploy\"},\"parameters\":{\"FunctionName\":\"",
-              {
-                "Ref": "WebappDeploy4D661524"
-              },
-              "\",\"Payload\":\"{\\\"artifactS3Url\\\":\\\"s3://incub-common-build-artifacts-001112238813-eu-west-1/snapshot-value\\\"}\"}}"
-            ]
-          ]
-        },
-        "InstallLatestAwsSdk": false
-      },
-      "DependsOn": [
-        "WebappDeployCustomResourceCustomResourcePolicyB85F7B61"
-      ],
-      "UpdateReplacePolicy": "Delete",
-      "DeletionPolicy": "Delete",
-      "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/CustomResource/Resource/Default"
-      }
-    },
-    "WebappDeployCustomResourceCustomResourcePolicyB85F7B61": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "lambda:InvokeFunction",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "WebappDeploy4D661524",
-                  "Arn"
-                ]
-              }
-            }
-          ],
-          "Version": "2012-10-17"
-        },
-        "PolicyName": "WebappDeployCustomResourceCustomResourcePolicyB85F7B61",
-        "Roles": [
-          {
-            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
-          }
-        ]
-      },
-      "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/CustomResource/CustomResourcePolicy/Resource"
-      }
-    },
-    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+    "WebappDeployProviderframeworkonEventServiceRole6401B28E": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -496,10 +423,55 @@
         ]
       },
       "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource"
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/Provider/framework-onEvent/ServiceRole/Resource"
       }
     },
-    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+    "WebappDeployProviderframeworkonEventServiceRoleDefaultPolicy007A69B8": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "WebappDeployWebappDeployResource568A3E18",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "WebappDeployWebappDeployResource568A3E18",
+                          "Arn"
+                        ]
+                      },
+                      ":*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "WebappDeployProviderframeworkonEventServiceRoleDefaultPolicy007A69B8",
+        "Roles": [
+          {
+            "Ref": "WebappDeployProviderframeworkonEventServiceRole6401B28E"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource"
+      }
+    },
+    "WebappDeployProviderframeworkonEvent095845EB": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
@@ -508,11 +480,22 @@
         },
         "Role": {
           "Fn::GetAtt": [
-            "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+            "WebappDeployProviderframeworkonEventServiceRole6401B28E",
             "Arn"
           ]
         },
-        "Handler": "index.handler",
+        "Description": "AWS CDK resource provider framework - onEvent (cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/Provider)",
+        "Environment": {
+          "Variables": {
+            "USER_ON_EVENT_FUNCTION_ARN": {
+              "Fn::GetAtt": [
+                "WebappDeployWebappDeployResource568A3E18",
+                "Arn"
+              ]
+            }
+          }
+        },
+        "Handler": "framework.onEvent",
         "Runtime": "nodejs14.x",
         "Tags": [
           {
@@ -528,16 +511,34 @@
             "Value": "cdkappref-dev-webapp"
           }
         ],
-        "Timeout": 120
+        "Timeout": 900
       },
       "DependsOn": [
-        "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+        "WebappDeployProviderframeworkonEventServiceRoleDefaultPolicy007A69B8",
+        "WebappDeployProviderframeworkonEventServiceRole6401B28E"
       ],
       "Metadata": {
-        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/AWS679f53fac002430cb0da5b7982bd2287/Resource",
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/Provider/framework-onEvent/Resource",
         "aws:asset:path": "asset.snapshot-value",
         "aws:asset:is-bundled": false,
         "aws:asset:property": "Code"
+      }
+    },
+    "WebappDeployCustomResourceCA418804": {
+      "Type": "AWS::CloudFormation::CustomResource",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "WebappDeployProviderframeworkonEvent095845EB",
+            "Arn"
+          ]
+        },
+        "artifactS3Url": "s3://incub-common-build-artifacts-001112238813-eu-west-1/snapshot-value"
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/CustomResource/Default"
       }
     },
     "DomainNameParamB41E83D4": {

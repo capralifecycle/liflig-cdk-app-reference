@@ -171,46 +171,46 @@
             "data": "Distribution830FAC52"
           }
         ],
-        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/Resource/ServiceRole/Resource": [
+        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/WebappDeployResource/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "WebappDeployServiceRole78F79841"
+            "data": "WebappDeployWebappDeployResourceServiceRole6D7BB70F"
           }
         ],
-        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/Resource/ServiceRole/DefaultPolicy/Resource": [
+        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/WebappDeployResource/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "WebappDeployServiceRoleDefaultPolicyE446530F"
+            "data": "WebappDeployWebappDeployResourceServiceRoleDefaultPolicy5CB528F1"
           }
         ],
-        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/Resource/Resource": [
+        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/WebappDeployResource/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "WebappDeploy4D661524"
+            "data": "WebappDeployWebappDeployResource568A3E18"
           }
         ],
-        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/CustomResource/Resource/Default": [
+        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/Provider/framework-onEvent/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "WebappDeployCustomResourceCF959726"
+            "data": "WebappDeployProviderframeworkonEventServiceRole6401B28E"
           }
         ],
-        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/CustomResource/CustomResourcePolicy/Resource": [
+        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "WebappDeployCustomResourceCustomResourcePolicyB85F7B61"
+            "data": "WebappDeployProviderframeworkonEventServiceRoleDefaultPolicy007A69B8"
           }
         ],
-        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [
+        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/Provider/framework-onEvent/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+            "data": "WebappDeployProviderframeworkonEvent095845EB"
           }
         ],
-        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/AWS679f53fac002430cb0da5b7982bd2287/Resource": [
+        "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/CustomResource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AWS679f53fac002430cb0da5b7982bd22872D164C4C"
+            "data": "WebappDeployCustomResourceCA418804"
           }
         ],
         "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/DomainNameParam/Resource": [
