@@ -21,12 +21,6 @@
         "displayName": "cdkappref-build-core-prod-pipeline/cdkappref-prod"
       }
     },
-    "Tree": {
-      "type": "cdk:tree",
-      "properties": {
-        "file": "tree.json"
-      }
-    },
     "cdkappref-build-core-dev-pipeline.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
@@ -492,6 +486,12 @@
         ]
       },
       "displayName": "cdkappref-build-core-prod-pipeline"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
     }
   }
 }
