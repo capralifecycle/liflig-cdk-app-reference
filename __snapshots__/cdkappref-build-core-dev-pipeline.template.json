@@ -563,7 +563,8 @@
                 },
                 "Configuration": {
                   "S3Bucket": "incub-common-build-artifacts-001112238813-eu-west-1",
-                  "S3ObjectKey": "pipelines/cdkappref-core-dev/trigger"
+                  "S3ObjectKey": "pipelines/cdkappref-core-dev/trigger",
+                  "PollForSourceChanges": false
                 },
                 "Name": "source",
                 "OutputArtifacts": [
@@ -765,8 +766,7 @@
                     ]
                   },
                   "TemplateConfiguration": "GenerateCloudAssembly_Output::assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevcore9043A152.template.json.config.json",
-                  "ActionMode": "CHANGE_SET_REPLACE",
-                  "ChangeSetName": "PipelineChange",
+                  "ActionMode": "CREATE_UPDATE",
                   "TemplatePath": "GenerateCloudAssembly_Output::assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevcore9043A152.template.json"
                 },
                 "InputArtifacts": [
@@ -774,7 +774,7 @@
                     "Name": "GenerateCloudAssembly_Output"
                   }
                 ],
-                "Name": "core.Prepare",
+                "Name": "core.Deploy",
                 "RoleArn": {
                   "Fn::Join": [
                     "",
@@ -812,8 +812,7 @@
                     ]
                   },
                   "TemplateConfiguration": "GenerateCloudAssembly_Output::assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.template.json.config.json",
-                  "ActionMode": "CHANGE_SET_REPLACE",
-                  "ChangeSetName": "PipelineChange",
+                  "ActionMode": "CREATE_UPDATE",
                   "TemplatePath": "GenerateCloudAssembly_Output::assembly-cdkappref-build-core-dev-pipeline-cdkappref-dev/cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.template.json"
                 },
                 "InputArtifacts": [
@@ -821,60 +820,6 @@
                     "Name": "GenerateCloudAssembly_Output"
                   }
                 ],
-                "Name": "webapp.Prepare",
-                "RoleArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":iam::001112238813:role/cdk-liflig-deploy-role-001112238813-eu-west-1"
-                    ]
-                  ]
-                },
-                "RunOrder": 1
-              },
-              {
-                "ActionTypeId": {
-                  "Category": "Deploy",
-                  "Owner": "AWS",
-                  "Provider": "CloudFormation",
-                  "Version": "1"
-                },
-                "Configuration": {
-                  "StackName": "cdkappref-dev-core",
-                  "ActionMode": "CHANGE_SET_EXECUTE",
-                  "ChangeSetName": "PipelineChange"
-                },
-                "Name": "core.Deploy",
-                "RoleArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":iam::001112238813:role/cdk-liflig-deploy-role-001112238813-eu-west-1"
-                    ]
-                  ]
-                },
-                "RunOrder": 2
-              },
-              {
-                "ActionTypeId": {
-                  "Category": "Deploy",
-                  "Owner": "AWS",
-                  "Provider": "CloudFormation",
-                  "Version": "1"
-                },
-                "Configuration": {
-                  "StackName": "cdkappref-dev-webapp",
-                  "ActionMode": "CHANGE_SET_EXECUTE",
-                  "ChangeSetName": "PipelineChange"
-                },
                 "Name": "webapp.Deploy",
                 "RoleArn": {
                   "Fn::Join": [
@@ -888,7 +833,7 @@
                     ]
                   ]
                 },
-                "RunOrder": 2
+                "RunOrder": 1
               }
             ],
             "Name": "cdkappref-dev"
@@ -1225,6 +1170,78 @@
         "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/PrepareCdkSource/prepare-cdk-source/CodePipelineActionRole/DefaultPolicy/Resource"
       }
     },
+    "PipelineCodePipelineEventsRole6E48CF6D": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/EventsRole/Resource"
+      }
+    },
+    "PipelineCodePipelineEventsRoleDefaultPolicy87D65CBE": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "codepipeline:StartPipelineExecution",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":codepipeline:eu-west-1:001112238813:",
+                    {
+                      "Ref": "PipelineCodePipeline4FC0E9B7"
+                    }
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineCodePipelineEventsRoleDefaultPolicy87D65CBE",
+        "Roles": [
+          {
+            "Ref": "PipelineCodePipelineEventsRole6E48CF6D"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/EventsRole/DefaultPolicy/Resource"
+      }
+    },
     "PipelineCodePipelineBuildGenerateCloudAssemblyCdkBuildProjectRole5D5FB735": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -1435,6 +1452,61 @@
       },
       "Metadata": {
         "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CdkBuildProject/Resource"
+      }
+    },
+    "PipelinePipelineTriggerDBF83560": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "EventPattern": {
+          "source": [
+            "aws.s3"
+          ],
+          "detail-type": [
+            "Object Created"
+          ],
+          "detail": {
+            "bucket": {
+              "name": [
+                "incub-common-build-artifacts-001112238813-eu-west-1"
+              ]
+            },
+            "object": {
+              "key": [
+                "pipelines/cdkappref-core-dev/trigger"
+              ]
+            }
+          }
+        },
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:",
+                  {
+                    "Ref": "AWS::Partition"
+                  },
+                  ":codepipeline:eu-west-1:001112238813:",
+                  {
+                    "Ref": "PipelineCodePipeline4FC0E9B7"
+                  }
+                ]
+              ]
+            },
+            "Id": "Target0",
+            "RoleArn": {
+              "Fn::GetAtt": [
+                "PipelineCodePipelineEventsRole6E48CF6D",
+                "Arn"
+              ]
+            }
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/PipelineTrigger/Resource"
       }
     },
     "PipelineCdkPipelineCodeBuildActionRole1C961342": {
