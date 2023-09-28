@@ -3,13 +3,13 @@
     "ExampleResourceAC53F4AE": {
       "Type": "AWS::SSM::Parameter",
       "Properties": {
-        "Type": "String",
-        "Value": "dev",
         "Tags": {
           "Project": "liflig-cdk-app-reference",
           "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
           "StackName": "cdkappref-dev-core"
-        }
+        },
+        "Type": "String",
+        "Value": "dev"
       },
       "Metadata": {
         "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/core/ExampleResource/Resource"
@@ -18,14 +18,14 @@
     "DemoParam641CC643": {
       "Type": "AWS::SSM::Parameter",
       "Properties": {
-        "Type": "String",
-        "Value": "hello world",
         "Name": "/cdkappref/dev/demo",
         "Tags": {
           "Project": "liflig-cdk-app-reference",
           "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
           "StackName": "cdkappref-dev-core"
-        }
+        },
+        "Type": "String",
+        "Value": "hello world"
       },
       "Metadata": {
         "aws:cdk:path": "cdkappref-build-core-dev-pipeline/cdkappref-dev/core/DemoParam/Resource"

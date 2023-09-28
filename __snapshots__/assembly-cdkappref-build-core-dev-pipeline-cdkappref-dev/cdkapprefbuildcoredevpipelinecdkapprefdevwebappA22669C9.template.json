@@ -310,12 +310,6 @@
           "S3Bucket": "cdk-liflig-assets-001112238813-eu-west-1",
           "S3Key": "snapshot-value.zip"
         },
-        "Role": {
-          "Fn::GetAtt": [
-            "WebappDeployWebappDeployResourceServiceRole6D7BB70F",
-            "Arn"
-          ]
-        },
         "Environment": {
           "Variables": {
             "DEPLOY_LOG_BUCKET_URL": {
@@ -350,6 +344,12 @@
         },
         "Handler": "webapp_deploy.main.handler",
         "ReservedConcurrentExecutions": 1,
+        "Role": {
+          "Fn::GetAtt": [
+            "WebappDeployWebappDeployResourceServiceRole6D7BB70F",
+            "Arn"
+          ]
+        },
         "Runtime": "python3.8",
         "Tags": [
           {
@@ -478,12 +478,6 @@
           "S3Bucket": "cdk-liflig-assets-001112238813-eu-west-1",
           "S3Key": "snapshot-value.zip"
         },
-        "Role": {
-          "Fn::GetAtt": [
-            "WebappDeployProviderframeworkonEventServiceRole6401B28E",
-            "Arn"
-          ]
-        },
         "Description": "AWS CDK resource provider framework - onEvent (cdkappref-build-core-dev-pipeline/cdkappref-dev/webapp/WebappDeploy/Provider)",
         "Environment": {
           "Variables": {
@@ -496,7 +490,13 @@
           }
         },
         "Handler": "framework.onEvent",
-        "Runtime": "nodejs16.x",
+        "Role": {
+          "Fn::GetAtt": [
+            "WebappDeployProviderframeworkonEventServiceRole6401B28E",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs18.x",
         "Tags": [
           {
             "Key": "Project",
@@ -544,18 +544,18 @@
     "DomainNameParamB41E83D4": {
       "Type": "AWS::SSM::Parameter",
       "Properties": {
+        "Name": "/cdkappref/dev/webapp-domain-name",
+        "Tags": {
+          "Project": "liflig-cdk-app-reference",
+          "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
+          "StackName": "cdkappref-dev-webapp"
+        },
         "Type": "String",
         "Value": {
           "Fn::GetAtt": [
             "Distribution830FAC52",
             "DomainName"
           ]
-        },
-        "Name": "/cdkappref/dev/webapp-domain-name",
-        "Tags": {
-          "Project": "liflig-cdk-app-reference",
-          "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
-          "StackName": "cdkappref-dev-webapp"
         }
       },
       "Metadata": {
