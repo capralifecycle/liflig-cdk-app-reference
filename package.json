@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@capraconsulting/webapp-deploy-lambda": "2.1.4",
-    "@liflig/cdk": "2.15.3",
+    "@liflig/cdk": "2.16.0",
     "aws-cdk-lib": "2.93.0",
     "constructs": "10.3.0"
   }
