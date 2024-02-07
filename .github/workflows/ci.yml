@@ -1,0 +1,102 @@
+name: ci
+on:
+  push:
+    branches:
+      - "**"
+  workflow_dispatch:
+    inputs:
+      deploy-to-dev:
+        description: "Whether to deploy to dev"
+        type: boolean
+        required: true
+        default: false
+
+defaults:
+  run:
+    # NOTE: A bit stricter than the default bash options used by GitHub Actions
+    # (bash --noprofile --norc -e -o pipefail {0})
+    shell: bash --noprofile --norc -euo pipefail {0}
+
+# NOTE: Set concurrency for the current workflow to 1
+concurrency: ci-${{ github.ref }}-${{ github.workflow }}
+
+jobs:
+  build-and-deploy:
+    timeout-minutes: 60
+    runs-on: ubuntu-22.04
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+    steps:
+
+      - name: disable job
+        if: ${{ github.event.repository.name != 'liflig-cdk-app-reference' }}
+        run: |
+          echo "Aborting the workflow. Remove this step when the project is updated and ready for CI." >&2
+          exit  1
+
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - uses: capralifecycle/actions-lib/check-runtime-dependencies@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+
+      - uses: capralifecycle/actions-lib/parse-config@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+        id: config
+        with:
+          config-file: ".ldp.json"
+
+      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4.0.1
+        with:
+          node-version: 18.19.0
+
+      - uses: capralifecycle/actions-lib/configure-npm@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+
+      - uses: capralifecycle/actions-lib/configure-aws-credentials@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+        id: aws
+        with:
+          aws-account-id: ${{ steps.config.outputs.accountId }}
+          aws-iam-role-name: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && steps.config.outputs.roleName || steps.config.outputs.limitedRoleName }}
+
+      - name: install dependencies
+        run: npm ci
+
+      - name: lint
+        run: npm run lint
+
+      - name: verify cdk snapshots
+        run: npm run snapshots && git status && git add -N && git diff --exit-code
+
+      - name: upload cdk source and metadata
+        if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+        id: upload-cdk-source
+        uses: capralifecycle/actions-lib/upload-cdk-source@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+        with:
+          aws-s3-bucket-name: ${{ steps.config.outputs.artifactBucket }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ steps.aws.outputs.aws-access-key-id }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.aws.outputs.aws-secret-access-key }}
+          AWS_SESSION_TOKEN: ${{ steps.aws.outputs.aws-session-token }}
+
+      - name: trigger development deployment pipelines
+        if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) || inputs.deploy-to-dev == 'true' }}
+        uses: capralifecycle/actions-lib/trigger-deployment-pipeline@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+        env:
+          AWS_ACCESS_KEY_ID: ${{ steps.aws.outputs.aws-access-key-id }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.aws.outputs.aws-secret-access-key }}
+          AWS_SESSION_TOKEN: ${{ steps.aws.outputs.aws-session-token }}
+        with:
+          pipelines: ${{ steps.config.outputs.devPipelines }}
+          aws-s3-bucket-name: ${{ steps.config.outputs.artifactBucket }}
+          cdk-source-metadata-file: ${{ steps.upload-cdk-source.outputs.cdk-source-metadata-file }}
+
+      - name: trigger production deployment pipelines
+        uses: capralifecycle/actions-lib/trigger-deployment-pipeline@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+        if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ steps.aws.outputs.aws-access-key-id }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.aws.outputs.aws-secret-access-key }}
+          AWS_SESSION_TOKEN: ${{ steps.aws.outputs.aws-session-token }}
+        with:
+          pipelines: ${{ steps.config.outputs.prodPipelines }}
+          aws-s3-bucket-name: ${{ steps.config.outputs.artifactBucket }}
+          cdk-source-metadata-file: ${{ steps.upload-cdk-source.outputs.cdk-source-metadata-file }}
