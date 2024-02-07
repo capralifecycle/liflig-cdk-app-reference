@@ -6,13 +6,12 @@ The webapp being deployed is located in https://github.com/capraconsulting/webap
 
 ## Checklist if using this reference
 
-- Consider removing `LICENSE`
-- Modify `config.ts`
-- Modify `artifactsBucket` under `src/pipelines`
-- Artifact bucket and role in Jenkinsfile must be changed
-- Modify pipeline names in Jenkinsfile
-- Remove JOB_NAME check in Jenkinsfile
-- Modify stacks to fit the application
+- Consider removing [LICENSE](LICENSE)
+- Modify [src/config.ts](src/config.ts)
+- Modify `artifactsBucket` in pipelines under `src/pipelines`
+- Modify stacks under `src/stacks` to fit the application
+- Modify [.ldp.json](.ldp.json) with the relevant AWS configuration for the application
+- Remove `disable job`-step in [.github/workflows/ci.yml](.github/workflows/ci.yml)
 - Review dependencies
 
 ## Pre-commit checklist
