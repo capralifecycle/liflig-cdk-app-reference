@@ -38,9 +38,9 @@ jobs:
 
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
-      - uses: capralifecycle/actions-lib/check-runtime-dependencies@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+      - uses: capralifecycle/actions-lib/check-runtime-dependencies@6eec40efec972ae86feb9dac823a34067f1d2384 # v1.3.0
 
-      - uses: capralifecycle/actions-lib/parse-config@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+      - uses: capralifecycle/actions-lib/parse-config@6eec40efec972ae86feb9dac823a34067f1d2384 # v1.3.0
         id: config
         with:
           config-file: ".ldp.json"
@@ -49,9 +49,9 @@ jobs:
         with:
           node-version: 18.19.0
 
-      - uses: capralifecycle/actions-lib/configure-npm@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+      - uses: capralifecycle/actions-lib/configure-npm@6eec40efec972ae86feb9dac823a34067f1d2384 # v1.3.0
 
-      - uses: capralifecycle/actions-lib/configure-aws-credentials@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+      - uses: capralifecycle/actions-lib/configure-aws-credentials@6eec40efec972ae86feb9dac823a34067f1d2384 # v1.3.0
         id: aws
         with:
           aws-account-id: ${{ steps.config.outputs.accountId }}
@@ -69,7 +69,7 @@ jobs:
       - name: upload cdk source and metadata
         if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
         id: upload-cdk-source
-        uses: capralifecycle/actions-lib/upload-cdk-source@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+        uses: capralifecycle/actions-lib/upload-cdk-source@6eec40efec972ae86feb9dac823a34067f1d2384 # v1.3.0
         with:
           aws-s3-bucket-name: ${{ steps.config.outputs.artifactBucket }}
         env:
@@ -79,7 +79,7 @@ jobs:
 
       - name: trigger development deployment pipelines
         if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) || inputs.deploy-to-dev }}
-        uses: capralifecycle/actions-lib/trigger-deployment-pipeline@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+        uses: capralifecycle/actions-lib/trigger-deployment-pipeline@6eec40efec972ae86feb9dac823a34067f1d2384 # v1.3.0
         env:
           AWS_ACCESS_KEY_ID: ${{ steps.aws.outputs.aws-access-key-id }}
           AWS_SECRET_ACCESS_KEY: ${{ steps.aws.outputs.aws-secret-access-key }}
@@ -90,7 +90,7 @@ jobs:
           cdk-source-metadata-file: ${{ steps.upload-cdk-source.outputs.cdk-source-metadata-file }}
 
       - name: trigger production deployment pipelines
-        uses: capralifecycle/actions-lib/trigger-deployment-pipeline@42cbe330ccc0282f04edbf0a6ee8928b5b2c4df0 # v1.1.0
+        uses: capralifecycle/actions-lib/trigger-deployment-pipeline@6eec40efec972ae86feb9dac823a34067f1d2384 # v1.3.0
         if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
         env:
           AWS_ACCESS_KEY_ID: ${{ steps.aws.outputs.aws-access-key-id }}
