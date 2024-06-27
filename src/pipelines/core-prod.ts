@@ -9,7 +9,6 @@ export class CoreProdPipelineStack extends cdk.Stack {
   constructor(scope: constructs.Construct, id: string, props: cdk.StackProps) {
     super(scope, id, props)
 
-    // No Griid for incub yet.
     const artifactsBucket = s3.Bucket.fromBucketName(
       this,
       "ArtifactsBucket",
@@ -17,7 +16,6 @@ export class CoreProdPipelineStack extends cdk.Stack {
     )
 
     const pipeline = new cdkPipelines.LifligCdkPipeline(this, "Pipeline", {
-      // Can be removed if using a Griid-provisioned account.
       artifactsBucket,
       pipelineName: `${projectPrefix}-core-prod`,
       sourceType: "cdk-source",

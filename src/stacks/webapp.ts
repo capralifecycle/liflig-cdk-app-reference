@@ -16,7 +16,6 @@ export class WebappStack extends cdk.Stack {
   constructor(scope: constructs.Construct, id: string, props: Props) {
     super(scope, id, props)
 
-    // No Griid for incub yet.
     const artifactsBucket = s3.Bucket.fromBucketName(
       this,
       "ArtifactsBucket",
