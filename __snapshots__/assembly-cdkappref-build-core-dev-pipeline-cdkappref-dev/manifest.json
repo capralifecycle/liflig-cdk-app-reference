@@ -13,6 +13,7 @@
       "environment": "aws://001112238813/eu-west-1",
       "properties": {
         "templateFile": "cdkapprefbuildcoredevpipelinecdkapprefdevcore9043A152.template.json",
+        "terminationProtection": false,
         "tags": {
           "Project": "liflig-cdk-app-reference",
           "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
@@ -103,6 +104,7 @@
       "environment": "aws://001112238813/eu-west-1",
       "properties": {
         "templateFile": "cdkapprefbuildcoredevpipelinecdkapprefdevwebappA22669C9.template.json",
+        "terminationProtection": false,
         "tags": {
           "Project": "liflig-cdk-app-reference",
           "SourceRepo": "github/capralifecycle/liflig-cdk-app-reference",
