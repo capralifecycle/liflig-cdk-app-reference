@@ -1888,24 +1888,6 @@
               "Principal": {
                 "Service": "codebuild.amazonaws.com"
               }
-            },
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":iam::001112238813:root"
-                    ]
-                  ]
-                }
-              }
             }
           ],
           "Version": "2012-10-17"
