@@ -1256,7 +1256,21 @@
             }
           ],
           "Version": "2012-10-17"
-        }
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
       },
       "Metadata": {
         "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CdkBuildProject/Role/Resource"
@@ -1448,7 +1462,21 @@
         "Source": {
           "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm ci\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"npx cdk synth\"\n      ]\n    }\n  },\n  \"artifacts\": {\n    \"base-directory\": \"cdk.out\",\n    \"files\": \"**/*\"\n  }\n}",
           "Type": "CODEPIPELINE"
-        }
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "liflig-cdk-app-reference"
+          },
+          {
+            "Key": "SourceRepo",
+            "Value": "github/capralifecycle/liflig-cdk-app-reference"
+          },
+          {
+            "Key": "StackName",
+            "Value": "cdkappref-build-core-dev-pipeline"
+          }
+        ]
       },
       "Metadata": {
         "aws:cdk:path": "cdkappref-build-core-dev-pipeline/Pipeline/CodePipeline/Build/GenerateCloudAssembly/CdkBuildProject/Resource"
