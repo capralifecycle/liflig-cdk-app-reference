@@ -561,6 +561,7 @@
           "Type": "S3"
         },
         "Name": "cdkappref-core-dev",
+        "PipelineType": "V1",
         "RestartExecutionOnUpdate": true,
         "RoleArn": {
           "Fn::GetAtt": [
