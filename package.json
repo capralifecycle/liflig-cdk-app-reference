@@ -18,7 +18,7 @@
     "@typescript-eslint/parser": "8.20.0",
     "aws-cdk": "2.175.1",
     "eslint": "9.18.0",
-    "eslint-config-prettier": "9.1.0",
+    "eslint-config-prettier": "10.0.1",
     "eslint-plugin-prettier": "^5.0.0",
     "prettier": "3.4.2",
     "tsx": "4.19.2",
