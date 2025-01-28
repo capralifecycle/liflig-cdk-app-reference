@@ -16,7 +16,7 @@
     "@types/node": "22.10.10",
     "@typescript-eslint/eslint-plugin": "8.21.0",
     "@typescript-eslint/parser": "8.21.0",
-    "aws-cdk": "2.176.0",
+    "aws-cdk": "2.177.0",
     "eslint": "9.19.0",
     "eslint-config-prettier": "10.0.1",
     "eslint-plugin-prettier": "^5.0.0",
@@ -27,7 +27,7 @@
   "dependencies": {
     "@capraconsulting/webapp-deploy-lambda": "2.4.0",
     "@liflig/cdk": "3.0.15",
-    "aws-cdk-lib": "2.176.0",
+    "aws-cdk-lib": "2.177.0",
     "constructs": "10.4.2"
   }
 }
