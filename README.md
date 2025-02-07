@@ -1,6 +1,6 @@
 # liflig-cdk-app-reference
 
-This is a companion to https://confluence.capraconsulting.no/x/0NoBC
+This is a companion to [webapp-baseline](https://github.com/capralifecycle/webapp-baseline).
 
 The webapp being deployed is located in https://github.com/capraconsulting/webapp-baseline
 
