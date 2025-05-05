@@ -456,6 +456,16 @@
                   ]
                 }
               ]
+            },
+            {
+              "Action": "lambda:GetFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "WebappDeployWebappDeployResource568A3E18",
+                  "Arn"
+                ]
+              }
             }
           ],
           "Version": "2012-10-17"
