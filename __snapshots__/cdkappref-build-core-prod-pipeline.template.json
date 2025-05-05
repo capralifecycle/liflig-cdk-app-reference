@@ -721,7 +721,7 @@
                     "Name": "GenerateCloudAssembly_Output"
                   }
                 ],
-                "Name": "FileAsset1",
+                "Name": "WebappDeploy_WebappDeployResource_Code",
                 "RoleArn": {
                   "Fn::GetAtt": [
                     "PipelineCdkPipelineCodeBuildActionRole1C961342",
@@ -747,7 +747,7 @@
                     "Name": "GenerateCloudAssembly_Output"
                   }
                 ],
-                "Name": "FileAsset2",
+                "Name": "WebappDeploy_Provider_framework-onEvent_Code",
                 "RoleArn": {
                   "Fn::GetAtt": [
                     "PipelineCdkPipelineCodeBuildActionRole1C961342",
@@ -987,15 +987,9 @@
               "Effect": "Allow",
               "Principal": {
                 "AWS": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":iam::001112238813:root"
-                    ]
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineRoleEE058E60",
+                    "Arn"
                   ]
                 }
               }
@@ -1134,15 +1128,9 @@
               "Effect": "Allow",
               "Principal": {
                 "AWS": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":iam::001112238813:root"
-                    ]
+                  "Fn::GetAtt": [
+                    "PipelineCodePipelineRoleEE058E60",
+                    "Arn"
                   ]
                 }
               }
@@ -2166,7 +2154,7 @@
         "Cache": {
           "Type": "NO_CACHE"
         },
-        "Description": "Pipeline step cdkappref-build-core-prod-pipeline/CodePipeline/Assets/FileAsset1",
+        "Description": "Pipeline step cdkappref-build-core-prod-pipeline/CodePipeline/Assets/WebappDeploy_WebappDeployResource_Code",
         "EncryptionKey": {
           "Fn::GetAtt": [
             "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
@@ -2218,7 +2206,7 @@
         "Cache": {
           "Type": "NO_CACHE"
         },
-        "Description": "Pipeline step cdkappref-build-core-prod-pipeline/CodePipeline/Assets/FileAsset2",
+        "Description": "Pipeline step cdkappref-build-core-prod-pipeline/CodePipeline/Assets/WebappDeploy_Provider_framework-onEvent_Code",
         "EncryptionKey": {
           "Fn::GetAtt": [
             "PipelineCodePipelineArtifactsBucketEncryptionKey0E77C3AE",
