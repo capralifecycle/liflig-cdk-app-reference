@@ -243,5 +243,5 @@
       "displayName": "cdkappref-build-core-prod-pipeline/cdkappref-prod/webapp"
     }
   },
-  "minimumCliVersion": "2.1005.0"
+  "minimumCliVersion": "2.1019.1"
 }
