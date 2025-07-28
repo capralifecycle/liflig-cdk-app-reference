@@ -500,6 +500,10 @@
           }
         },
         "Handler": "framework.onEvent",
+        "LoggingConfig": {
+          "ApplicationLogLevel": "FATAL",
+          "LogFormat": "JSON"
+        },
         "Role": {
           "Fn::GetAtt": [
             "WebappDeployProviderframeworkonEventServiceRole6401B28E",
