@@ -6,21 +6,15 @@
   "scripts": {
     "cdk": "cdk",
     "fetch-variables": "fetch-pipeline-variables",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lint": "biome check",
+    "lint:fix": "biome check --fix",
+    "format": "biome format --write",
     "snapshots": "rm -rf cdk.out __snapshots__ && IS_SNAPSHOT=true cdk synth && cdk-create-snapshots"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.16.0",
+    "@biomejs/biome": "2.1.3",
     "@types/node": "22.16.5",
-    "@typescript-eslint/eslint-plugin": "8.38.0",
-    "@typescript-eslint/parser": "8.38.0",
     "aws-cdk": "2.1022.0",
-    "eslint": "9.32.0",
-    "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-prettier": "^5.0.0",
-    "prettier": "3.6.2",
     "tsx": "4.20.3",
     "typescript": "5.8.3"
   },
