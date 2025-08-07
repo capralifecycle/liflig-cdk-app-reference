@@ -1,10 +1,10 @@
-import * as constructs from "constructs"
+import * as webappDeploy from "@capraconsulting/webapp-deploy-lambda"
+import * as cdk from "aws-cdk-lib"
 import * as cf from "aws-cdk-lib/aws-cloudfront"
 import * as origins from "aws-cdk-lib/aws-cloudfront-origins"
 import * as s3 from "aws-cdk-lib/aws-s3"
 import * as ssm from "aws-cdk-lib/aws-ssm"
-import * as cdk from "aws-cdk-lib"
-import * as webappDeploy from "@capraconsulting/webapp-deploy-lambda"
+import type * as constructs from "constructs"
 import { projectPrefix } from "../config"
 
 interface Props extends cdk.StackProps {

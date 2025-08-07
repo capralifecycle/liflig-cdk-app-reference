@@ -1,7 +1,7 @@
-import * as constructs from "constructs"
-import * as s3 from "aws-cdk-lib/aws-s3"
-import * as cdk from "aws-cdk-lib"
 import { cdkPipelines } from "@liflig/cdk"
+import * as cdk from "aws-cdk-lib"
+import * as s3 from "aws-cdk-lib/aws-s3"
+import type * as constructs from "constructs"
 import { devAccountId, projectPrefix } from "../config"
 import { CoreStage } from "../stages/core-stage"
 

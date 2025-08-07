@@ -1,6 +1,6 @@
-import * as constructs from "constructs"
-import * as ssm from "aws-cdk-lib/aws-ssm"
 import * as cdk from "aws-cdk-lib"
+import * as ssm from "aws-cdk-lib/aws-ssm"
+import type * as constructs from "constructs"
 import { projectPrefix } from "../config"
 
 interface Props extends cdk.StackProps {
