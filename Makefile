@@ -10,8 +10,14 @@ build:
 
 .PHONY: clean
 clean:
+	rm -rf cdk.out
+
+.PHONY: clean-all
+clean-all: clean
 	rm -rf node_modules
 
 .PHONY: snapshots
 snapshots:
 	npm run snapshots
+
+
