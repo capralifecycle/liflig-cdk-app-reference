@@ -2,6 +2,7 @@
   "app": "tsx src/app.ts",
   "requireApproval": "never",
   "context": {
-    "@aws-cdk/core:bootstrapQualifier": "liflig"
+    "@aws-cdk/core:bootstrapQualifier": "liflig",
+    "cli-telemetry" : "false"
   }
 }
