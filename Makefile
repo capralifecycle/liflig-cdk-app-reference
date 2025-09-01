@@ -8,6 +8,10 @@ build:
 	npm run lint
 	npm run snapshots
 
+.PHONY: lint
+lint:
+	npm run lint
+
 .PHONY: clean
 clean:
 	rm -rf cdk.out
