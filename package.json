@@ -9,19 +9,21 @@
     "lint": "biome check",
     "lint:fix": "biome check --fix",
     "format": "biome format --write",
-    "snapshots": "rm -rf cdk.out __snapshots__ && IS_SNAPSHOT=true cdk synth && cdk-create-snapshots"
+    "snapshots": "rm -rf cdk.out __snapshots__ && IS_SNAPSHOT=true cdk synth && cdk-create-snapshots",
+    "upgrade-dependencies": "ncu --upgrade --install always --format group"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.5",
-    "@types/node": "24.7.1",
+    "@biomejs/biome": "2.2.6",
+    "@types/node": "24.7.2",
     "aws-cdk": "2.1030.0",
+    "npm-check-updates": "19.0.0",
     "tsx": "4.20.6",
     "typescript": "5.9.3"
   },
   "dependencies": {
     "@capraconsulting/webapp-deploy-lambda": "2.5.0",
-    "@liflig/cdk": "3.15.10",
-    "aws-cdk-lib": "2.213.0",
+    "@liflig/cdk": "3.15.11",
+    "aws-cdk-lib": "2.219.0",
     "constructs": "10.4.2"
   }
 }
