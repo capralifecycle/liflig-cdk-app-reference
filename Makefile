@@ -24,4 +24,7 @@ clean-all: clean
 snapshots:
 	npm run snapshots
 
-
+.PHONY: upgrade-dependencies
+upgrade-dependencies:
+	npm run upgrade-dependencies
+	npm run snapshots
