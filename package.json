@@ -13,7 +13,7 @@
     "upgrade-dependencies": "ncu --upgrade --install always --format group"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.3",
+    "@biomejs/biome": "2.3.4",
     "@types/node": "24.9.1",
     "aws-cdk": "2.1031.1",
     "npm-check-updates": "19.1.2",
