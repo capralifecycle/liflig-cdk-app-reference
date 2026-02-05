@@ -10,7 +10,7 @@
     "lint:fix": "biome check --fix",
     "format": "biome format --write",
     "snapshots": "rm -rf cdk.out __snapshots__ && IS_SNAPSHOT=true cdk synth && cdk-create-snapshots",
-    "upgrade-dependencies": "ncu --upgrade --install always --format group"
+    "upgrade-dependencies": "ncu --upgrade --install always --format group --reject @types/node"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.13",
