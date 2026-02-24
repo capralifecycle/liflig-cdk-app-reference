@@ -15,15 +15,15 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.4",
     "@types/node": "24.10.13",
-    "aws-cdk": "2.1106.1",
+    "aws-cdk": "2.1107.0",
     "npm-check-updates": "19.4.1",
     "tsx": "4.21.0",
     "typescript": "5.9.3"
   },
   "dependencies": {
-    "@capraconsulting/webapp-deploy-lambda": "2.5.49",
-    "@liflig/cdk": "3.20.9",
-    "aws-cdk-lib": "2.239.0",
+    "@capraconsulting/webapp-deploy-lambda": "2.5.50",
+    "@liflig/cdk": "3.20.10",
+    "aws-cdk-lib": "2.240.0",
     "constructs": "10.5.1"
   }
 }
