@@ -16,7 +16,7 @@
     "@biomejs/biome": "2.4.4",
     "@types/node": "24.10.15",
     "aws-cdk": "2.1107.0",
-    "npm-check-updates": "19.5.0",
+    "npm-check-updates": "19.6.2",
     "tsx": "4.21.0",
     "typescript": "5.9.3"
   },
