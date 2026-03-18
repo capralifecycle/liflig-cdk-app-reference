@@ -1,0 +1,51 @@
+{
+  "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core": [
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "Project",
+          "value": "liflig-cdk-app-reference"
+        },
+        {
+          "key": "SourceRepo",
+          "value": "github/capralifecycle/liflig-cdk-app-reference"
+        },
+        {
+          "key": "StackName",
+          "value": "cdkappref-prod-core"
+        }
+      ]
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core/ExampleResource/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExampleResourceAC53F4AE"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core/DemoParam/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DemoParam641CC643"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ]
+}
