@@ -1,0 +1,111 @@
+{
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp": [
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "Project",
+          "value": "liflig-cdk-app-reference"
+        },
+        {
+          "key": "SourceRepo",
+          "value": "github/capralifecycle/liflig-cdk-app-reference"
+        },
+        {
+          "key": "StackName",
+          "value": "cdkappref-staging-webapp"
+        }
+      ]
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebBucket12880F5B"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/Distribution/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Distribution830FAC52"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/DomainNameParam/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DomainNameParamB41E83D4"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebBucketPolicy95D08FAA"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/WebappDeployResource/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebappDeployWebappDeployResource568A3E18"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/CustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebappDeployCustomResourceCA418804"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/Distribution/Origin1/S3Origin/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DistributionOrigin1S3Origin5F5C0696"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/WebappDeployResource/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebappDeployWebappDeployResourceServiceRole6D7BB70F"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/Provider/framework-onEvent/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebappDeployProviderframeworkonEvent095845EB"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/WebappDeployResource/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebappDeployWebappDeployResourceServiceRoleDefaultPolicy5CB528F1"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/Provider/framework-onEvent/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebappDeployProviderframeworkonEventServiceRole6401B28E"
+    }
+  ],
+  "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp/WebappDeploy/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebappDeployProviderframeworkonEventServiceRoleDefaultPolicy007A69B8"
+    }
+  ]
+}
