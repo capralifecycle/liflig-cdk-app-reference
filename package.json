@@ -18,7 +18,7 @@
     "aws-cdk": "2.1114.1",
     "npm-check-updates": "19.6.6",
     "tsx": "4.21.0",
-    "typescript": "5.9.3"
+    "typescript": "6.0.2"
   },
   "dependencies": {
     "@capraconsulting/webapp-deploy-lambda": "2.5.75",
