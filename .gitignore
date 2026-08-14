@@ -2,3 +2,4 @@
 node_modules/
 /cdk.out/
 /variables.json
+/__snapshots__/validation-report.json
