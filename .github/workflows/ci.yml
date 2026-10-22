@@ -47,7 +47,7 @@ jobs:
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 24
+          node-version-file: ".node-version"
 
       - uses: capralifecycle/actions-lib/configure-aws-credentials@090f14b4d0f4179c2d64e1351e479ff17689485d # v1.21.2
         id: aws
