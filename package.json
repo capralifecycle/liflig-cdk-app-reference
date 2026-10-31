@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.3",
-    "@types/node": "24.19.2",
+    "@types/node": "26.6.5",
     "aws-cdk": "2.1146.1",
     "npm-check-updates": "23.1.1",
     "tsx": "4.23.15",
