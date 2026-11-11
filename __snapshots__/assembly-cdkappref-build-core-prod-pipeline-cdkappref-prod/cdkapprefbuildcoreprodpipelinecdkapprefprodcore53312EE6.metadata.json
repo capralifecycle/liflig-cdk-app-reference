@@ -1,6 +1,10 @@
 {
   "/cdkappref-build-core-prod-pipeline/cdkappref-prod/core": [
     {
+      "type": "aws:cdk:templateFile",
+      "data": "cdkapprefbuildcoreprodpipelinecdkapprefprodcore53312EE6.template.json"
+    },
+    {
       "type": "aws:cdk:stack-tags",
       "data": [
         {

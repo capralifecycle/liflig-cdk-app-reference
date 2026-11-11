@@ -1,6 +1,10 @@
 {
   "/cdkappref-build-core-prod-pipeline/cdkappref-staging/webapp": [
     {
+      "type": "aws:cdk:templateFile",
+      "data": "cdkapprefbuildcoreprodpipelinecdkapprefstagingwebapp960D00E8.template.json"
+    },
+    {
       "type": "aws:cdk:stack-tags",
       "data": [
         {
