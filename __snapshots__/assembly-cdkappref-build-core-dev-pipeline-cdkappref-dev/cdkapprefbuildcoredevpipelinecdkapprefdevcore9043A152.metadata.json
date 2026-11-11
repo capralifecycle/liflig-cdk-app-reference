@@ -1,6 +1,10 @@
 {
   "/cdkappref-build-core-dev-pipeline/cdkappref-dev/core": [
     {
+      "type": "aws:cdk:templateFile",
+      "data": "cdkapprefbuildcoredevpipelinecdkapprefdevcore9043A152.template.json"
+    },
+    {
       "type": "aws:cdk:stack-tags",
       "data": [
         {
